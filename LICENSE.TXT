@@ -1,0 +1,59 @@
+Binary Software License Agreement 
+
+FUZHOU ROCKCHIP ELECTRONICS CO., LTD. (“ROCKCHIP”)IS WILLING TO LICENSE THE SOFTWARE IN BINARY FORM THAT YOU SELECTED FOR DOWNLOAD, INSTALL OR USE FROM ROCKCHIP (“SOFTWARE”) TO YOU ONLY UPON THE CONDITION THAT YOU ACCEPT ALL OF THE TERMS CONTAINED IN THIS BINARY SOFTWARE LICENSE AGREEMENT AND SUPPLEMENTAL LICENSE TERMS (COLLECTIVELY THIS "AGREEMENT"). PLEASE READ THIS AGREEMENT CAREFULLY. BY CLICKING THE "ACCEPT LICENSE AGREEMENT" (OR THE EQUIVALENT) BUTTON AND/OR BY DOWNLOADING, INSTALLING, COPYING, SAVING OR OTHERWISE USING THIS SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ AND AGREED TO BE BOUND BY THE TERMS AND CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT AGREE TO ALL OF THE TERMS AND CONDITIONS OF THIS AGREEMENT, CANCEL THE INSTALLATION OR DISTINUE USING THE SOFTWARE.
+
+1.  License Grant 
+1.1 Subject to the terms and conditions of this Agreement, including, without limitation, the restrictions set forth in this Agreement, Rockchip hereby grants to you a limited, non-exclusive, non-transferable copyright license to: (a) install, save and use the Software; (b) to copy and distribute the Software.
+
+2.  License Restrictions
+2.1 Except as expressively granted in this Agreement or expressively authorized by Rockchip in writing, you may NOT:
+(a) distribute the Software in source code, but you may only distribute the Software in binary format;
+(b) distribute on a standalone basis but you may distribute the Software in conjunction with platforms incorporating Rockchip integrated circuits;
+(c) modify the Software in whole or part;
+(d) decompile, reverse-engineer, dissemble, or attempt to derive any source code from the Software;
+(e) remove or obscure any copyright, patent, or trademark statement or notices contained in the Software.
+
+2.2 You shall only distribute the Software under the terms and conditions of this Agreement and include the copy of this Agreement accompanying such distribution.
+
+2.3 The Software may include the third party software that is licensed pursuant to the applicable third party software licenses agreement(s). You agree to comply with all terms and conditions imposed on you in the applicable third party licenses, if you wish to use such third party software. Rockchip does not provide any warranty whatsoever with respect to that such third party software. In any event, you shall not subject the Software to any third party license terms (e.g., open source license terms).
+
+2.4 Except as expressly provided in this Agreement, no other license is granted explicitly, by implication, or otherwise under any intellectual property rights, including patents, trademarks, trade secrets or copyrights.
+
+3. Feedback
+3.1 If you provide Rockchip with any feedback, suggestions, comments, ideas, reviews, bug reports, or any similar or related information (“Feedback”), you agree that: (a) Rockhip will be able to free use and share such Feedback without your consent; (b) Rockchip will have no obligation to keep confidentiality to such Feedback. If you do not agree with these terms regarding Feedback, your sole option is to not submit such specific Feedback to Rockchip.
+
+4. Updates, Upgrades 
+4.1 Rockchip may release any updates, upgrades, or new versions of the Software at any time. If you decide to install any updates, upgrades, or new versions of the Software provided by Rockchip, the terms and conditions of this Agreement will govern such updates, upgrades, or new versions of the Software.
+
+5. No Technical Support
+5.1 Rockchip will not be obliged to provide any maintenance, technical support related to the Software.
+
+6.  Ownership 
+6.1 Rockchip and/or its licensor(s) retain all rights, titles, and interests in and to the Software and any updates, upgrades. You hereby agree that you will not assert any claim that the Software infringes any Intellectual Property Rights owned or controlled by you.
+
+7.  No Warranties
+7.1 THE SOFTEWARE IS PROVIDED “AS IS” WITHOUT WARRANTY OR CONDITION OF ANY KIND, EITHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, WITHOUT LIMITATION, ANY WARRANTY OR CONDITION WITH RESPECT TO TITLE, MERCHANTABILITY, FITNESS FOR ANY PARTICULAR PURPOSE, OR NON-INFRINGEMENT. ROCKCHIP DOES NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE SOFTWARE WILL MEET YOUR REQUIREMENTS OR WILL BE 100% ERROR FREE.   
+
+8.  Indemnifications
+8.1 You should indemnify, hold harmless, and defend Rockchip from and against any claims, damages, losses, liabilities, obligations, and costs (including attorney fees) associated with an allegation arising out of your failure to adhere to the terms and conditions of this Agreement, and arising out of your unintended or unauthorized use of the Software or its updates and upgrades.
+
+9.  Limitation of Liability. 
+9.1 IN NO EVENT WILL ROCKCHIP BE LIABLE FOR ANY LOSS OF DATA, LOSS OF PROFITS, COST OF COVER OR OTHER SPECIAL, INCIDENTAL, CONSEQUENTIAL, INDIRECT, PUNITIVE, EXEMPLARY OR RELIANCE DAMAGES ARISING FROM OR IN RELATION TO THIS AGREEMENT, EVEN IF ROCKCHIP HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. HOWEVER CAUSED AND REGARDLESS OF THEORY OF LIABILITY, AND THE AGGREGATE LIABILITY OF ROCKCHIP UNDER THIS AGREEMENT SHALL NOT EXCEED $100 USD.
+
+10. Term and Termination
+10.1 This Agreement will come into effect on the date you accept this Agreement and shall continue unless early termination by Rockchip any time due to your breach of this Agreement. 
+10.2 Upon expiration or termination of this Agreement, you should delete or destroy all documentary data relating to the Software in your possession and the license granted to you in this Agreement shall terminate. Sections 2 through 14 shall survive the termination of this Agreement.
+
+11. Assignment
+11.1 You shall not assign this Agreement in whole or part without Rockchip prior written consent. Any attempted assignment to the contrary will be null and void.
+
+12. Severability
+12.1 If any provision in this Agreement will be found or be held to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.
+
+13. Export Laws
+13.1 You agree to comply with all applicable export control laws which may apply to any use of the Software.
+
+14. Governing Law and Jurisdiction
+14.1 This Agreement will be governed by and construed in accordance with the laws of the People’s Republic of China (“PRC”), without regard to principles of conflict of laws. You agree that any dispute arising out of or in connection with this Agreement will be decided to a court of competent jurisdiction which located in Fuzhou City, PRC.
+
+
