@@ -1,0 +1,10 @@
+This is a simple readme for this tool.
+
+This tool can be used for flash image to Android or Linux device
+You can see different layout their partition layout is different. 
+See http://rockchip.wikidot.com/partitions for reference. 
+The address of first part is 0xcccccccc. That means it have to be a prebuilt
+bootloader provide by rockchip. For RK3288, it have to be rkbin/rk32/RK3288UbootLoader_V2.30.06.bin
+the loader1 is U-Boot binary you build
+the boot is image kernel, dtb and extlinux.conf file
+the rootfs is rootfs image. 
