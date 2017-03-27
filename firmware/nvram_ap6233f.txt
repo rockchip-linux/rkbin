@@ -1,0 +1,136 @@
+#AP6233F_NVRAM_V1.1_20151210
+# NVRAM file for BCM94334WLAGB board
+# 5GHz FEM and 2.4GHz FEM 
+
+manfid=0x2d0
+prodid=0x05de
+vendid=0x14e4
+devid=0x4380
+boardtype=0x05de
+boardrev=0x1203
+boardnum=22
+macaddr=00:90:4c:c5:12:38
+sromrev=3
+#boardflags: 5GHz FEM: has ext 5GHz PA + LNA
+#            2.4GHz FEM: has ext 2.4GHz PA + LNA
+#            2.4GHz FEM: SP3T switch share with BT
+#            keep original 0x200
+boardflags=0x10081800
+xtalfreq=37400
+nocrc=1
+ag0=255
+aa2g=1
+ccode=ALL
+pa0itssit=0x20
+#PA parameters for 2.4GHz
+pa0b0=5870
+pa0b1=-720
+pa0b2=-172
+tssifloor2g=14
+extpagain2g=2
+extpagain5g=2
+# rssi params for 2.4GHz
+rssismf2g=0xf
+rssismc2g=0x8
+rssisav2g=0x1
+cckPwrOffset=3
+# rssi params for 5GHz
+rssismf5g=0xf
+rssismc5g=0x8
+rssisav5g=0x1
+#PA parameters for lower a-band
+pa1lob0=6005
+pa1lob1=-734
+pa1lob2=-182
+tssifloor5gl=21
+#PA parameters for midband
+pa1b0=5956
+pa1b1=-730
+pa1b2=-181
+tssifloor5gm=21
+#PA paramasdeters for high band
+pa1hib0=5909
+pa1hib1=-730
+pa1hib2=-186
+tssifloor5gh=21
+rxpo5g=0
+#set 2.4G max power  and 5G max power 
+maxp2ga0=0x58
+maxp5ga0=0x48
+maxp5gla0=0x43
+maxp5gha0=0x4B
+#set CCK power 
+cck2gpo=0x1111 
+#set g mode power 
+ofdm2gpo=0x66666666
+#set 2.4G n mode HT20 power 
+mcs2gpo0=0x8888
+mcs2gpo1=0x8888
+#set 2.4G n mode HT40 power 
+mcs2gpo2=0x8888
+mcs2gpo3=0x8888
+#set 5G a mode power 
+ofdm5gpo=0x22222222
+ofdm5glpo=0x22222222
+ofdm5ghpo=0x22222222
+#set 5G n mode HT20 power 
+mcs5gpo0=0x0000
+mcs5gpo1=0x0000
+mcs5glpo0=0x0000
+mcs5glpo1=0x0000
+mcs5ghpo0=0x0000
+mcs5ghpo1=0x0000
+#set 5G n mode HT40 power 
+mcs5gpo2=0x4444
+mcs5gpo3=0x4444
+mcs5glpo2=0x4444
+mcs5glpo3=0x4444
+mcs5ghpo2=0x4444
+mcs5ghpo3=0x4444
+#il0macaddr=00:90:4c:c5:12:38
+#wl0id=0x431b
+#pagc2g=0x10
+#dacgc2g=4
+
+# SDIO oob parameters
+sd_gpout=0
+sd_oobonly=1
+
+# Parameters for DAC2x mode and ALPF bypass
+#dacrate2xen=1
+#txalpfbyp=1
+
+#Skyworks 2G & 5G FEM switch control table
+swctrlmap_2g=0x00400040,0x00030003,0x00010001,0x040301,0x1ff
+swctrlmap_5g=0x00080008,0x00300030,0x00100010,0x040301,0x2f8
+gain=32
+triso2g=5
+triso5g=5
+
+#tx parameters
+loflag=1
+iqlocalidx5g=40
+dlocalidx5g=70
+iqcalidx5g=50
+lpbckmode5g=1 
+txiqlopapu5g=0
+txiqlopapu2g=0
+dlorange_lowlimit=5
+
+aci_detect_en_2g=1
+
+#rx parameters
+gain_settle_dly_2g=4
+gain_settle_dly_5g=4
+noise_cal_po_2g=-1
+noise_cal_po_40_2g=-1
+noise_cal_high_gain_2g=73
+noise_cal_nf_substract_val_2g=346
+noise_cal_po_5g=-1
+noise_cal_po_40_5g=-1
+noise_cal_high_gain_5g=73
+noise_cal_nf_substract_val_5g=346
+#muxenab=0x10
+sd_oobonly=1 
+sd_gpout=4   
+sd_gpval=0

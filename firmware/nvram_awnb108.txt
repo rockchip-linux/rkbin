@@ -1,0 +1,52 @@
+# Azurewave Release 2012/03/12
+# NB108 bgn + BT
+# bcm94330uartsdb.txt
+manfid=0x2d0
+prodid=0x0552
+vendid=0x14e4
+devid=0x4360
+boardtype=0x0552
+boardrev=0x1102
+# this design has 2.4GHz SP3T switch
+boardflags=0x00080200
+nocrc=1
+xtalfreq=37400
+boardnum=22
+macaddr=00:11:22:33:44:55
+ag0=255
+aa2g=3
+ccode=ALL
+pa0b0=5035
+pa0b1=-592
+pa0b2=-145
+pa0itssit=0x20
+
+rssismf2g=0xa
+rssismc2g=0x3
+rssisav2g=0x7
+maxp2ga0=0x46
+sromrev=3
+il0macaddr=00:11:22:33:44:55
+wl0id=0x431b
+cckPwrOffset=0
+ofdm2gpo=0x44444444
+mcs2gpo0=0x6666
+mcs2gpo1=0x6666
+
+## MIL for RX, SW to R, not T
+swctrlmap_2g=0x440C440C,0x420A420A,0x420A420A,0x90A0A,0x1ff
+triso2g=0
+rfreg033=0x19
+rfreg033_cck=0x1f
+dacrate2g=160
+txalpfbyp2g=1
+bphyscale=17
+cckPwrIdxCorr=-15
+pacalidx2g=45
+txgaintbl=1
+
+# OOB setting
+sd_gpout=0
+sd_gpval=0
+sd_oobonly=1
+# muxenab=0x10
