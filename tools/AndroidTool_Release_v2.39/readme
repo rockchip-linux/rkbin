@@ -8,3 +8,39 @@ bootloader provide by rockchip. For RK3288, it have to be rkbin/rk32/RK3288Uboot
 the loader1 is U-Boot binary you build
 the boot is image kernel, dtb and extlinux.conf file
 the rootfs is rootfs image. 
+
+the partition table below:
++--------+----------------+----------+-------------+---------+
+| Boot   | Terminology #1 | Actual   | Rockchip    |         |
+| stage  |                | program  |  Image      |         |
+| number |                | name     |   Name      |         |
++--------+----------------+----------+-------------+---------+
+| 1      |  Primary       | ROM code | BootRom     |         |
+|        |  Program       |          |             |         |
+|        |  Loader        |          |             |         |
+|        |                |          |             |         |
+| 2      |  Secondary     | U-Boot   |idbloader.img| 0x40    |including u-boot if not use miniloader
+|        |  Program       | SPL      |idbspl.img   |         |
+|        |  Loader (SPL)  |          |             |         |
+|        |                |          |             |         |
+| 3      |  -             | U-Boot   | bl3.itb     | 0x200   | including u-boot and atf
+|        |                |          | u-boot.bin  | 0x200   |
+|        |                |          | uboot.img   | 0x4000  | only used with miniloader
+|        |                |          |             |         |
+|        |                | ATF      | trust.img   | 0x6000  | only used with miniloader for armv8
+|        |                |          |             |         |
+| 4      |  -             | kernel   | boot.img    | 0x8000  |
+|        |                |          |             |         |
+| 5      |  -             | rootfs   | rootfs.img  | 0x40000 |
++--------+----------------+----------+-------------+---------+
+
+
+For armv8 with miniloader(rk3328):
+
+Address  Name       Path
+         Boot    -- rkbin/rk33/rk3328_loader_v1.00.238.bin
+0x40     loader1 -- out/u-boot/idbloader.img
+0x4000   loader2 -- out/u-boot/uboot.img
+0x6000   atf     -- out/u-boot/trust.img
+0x8000   boot    -- out/u-boot/trust.img
+0x40000  rootfs  -- out/u-boot/trust.img

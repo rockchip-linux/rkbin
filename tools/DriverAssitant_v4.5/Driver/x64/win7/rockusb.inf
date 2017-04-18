@@ -1,0 +1,219 @@
+; Installation inf for the Rockusb Device
+;
+; Copyright By FuZhou Rockchip
+;
+; 
+;--------- Version Section ---------------------------------------------------
+
+[Version]
+Signature="$CHICAGO$"
+Class=Rockusb Device
+ClassGUID={79DFC2A8-2574-493C-AE71-52958E41BB00}
+Provider=%Provider%
+DriverVer=05/30/2016,4.50.0000
+CatalogFile=rockusb.cat
+
+[ControlFlags]
+; Pnp drivers should not be installable via non-PnP hardware dialogs
+ExcludeFromSelect = *
+
+;--------- ClassInstall/ClassInstall32 Section -------------------------------
+
+; Not necessary if using a standard class
+
+; 9X Style
+[ClassInstall]
+Addreg=RockusbClassReg
+
+; NT Style
+[ClassInstall32]
+Addreg=RockusbClassReg
+
+[RockusbClassReg]
+;reg-root,[subkey],[value-entry-name],[flags],[value]
+HKR,,,%REG_SZ%,%DeviceClassName%
+HKR,,Icon,,"1"
+HKR,,DeviceCharacteristics,%REG_DWORD%,0x100                    ; FILE_DEVICE_SECURE_OPEN
+HKR,,Security,,"D:P(A;;GR;;;WD)(A;;GA;;;SY)(A;;GA;;;BA)"        ; generic read - everybody
+                                                                ; generic all access - system and admin
+
+;--------- DestinationDirs Section -------------------------------------------
+
+[DestinationDirs]
+DefaultDestDir = 10
+Rockusb_Files_Driver = 12
+
+
+;--------- SourceDiskNames and SourceDiskFiles Section -----------------------
+; These sections identify source disks and files for installation.
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+rockusb.sys  = 1,,
+
+
+;--------- Manufacturer and Models Sections ----------------------------------
+
+[Manufacturer]
+%MfgName% = Rockchip,NTx86,NTamd64
+
+; DisplayName               Section           DeviceId
+[Rockchip.NTx86]
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_110A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_110B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_110C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_110D
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_110E
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_330A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_330B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_330C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_330D
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_330E
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_320A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_320B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_320C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_320D
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_320E
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_310A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_310B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_310C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_310D
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_301A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_300A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_300B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_290A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_292C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_292A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_281A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_282B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_273A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_261A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_262C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_262D
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_071b&PID_3228
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_071b&PID_3201
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_071b&PID_3226
+[Rockchip.NTamd64]
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_110A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_110B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_110C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_110D
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_110E
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_330A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_330B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_330C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_330D
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_330E
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_320A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_320B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_320C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_320D
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_320E
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_310A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_310B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_310C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_310D
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_301A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_300A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_300B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_290A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_292C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_292A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_281A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_282B
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_273A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_261A
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_262C
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_2207&PID_262D
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_071b&PID_3228
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_071b&PID_3201
+%Rockusb_DeviceDesc%=Rockusb_DDI, USB\VID_071b&PID_3226
+
+;---------- DDInstall Sections -----------------------------------------------
+; --------- Windows 98 -----------------
+
+; Experimentation has shown that DDInstall root names greater than 19 characters
+; cause problems in Windows 98
+
+[Rockusb_DDI]
+CopyFiles=Rockusb_Files_Driver
+AddReg=Rockusb_9X_AddReg
+
+[Rockusb_9X_AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,rockusb.sys
+HKR,,Description,,%Rockusb_DeviceDesc%
+
+; --------- Windows NT -----------------
+
+[Rockusb_DDI.NT]
+CopyFiles=Rockusb_Files_Driver
+AddReg=Rockusb_NT_AddReg
+
+[Rockusb_DDI.NT.Services]
+Addservice = Rockusb, %FLG_ADDREG_NOCLOBBER%, Rockusb_Service
+
+; --------- Registry ----------------------
+
+[Rockusb_NT_AddReg]
+;reg-root,[subkey],[value-entry-name],[flags],[value]
+HKR,rockchip,Key0,%REG_DWORD%,0
+
+; --------- Service ----------------------
+
+[Rockusb_Service]
+DisplayName    = %Rockusb_SvcDesc%
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\rockusb.sys
+LoadOrderGroup = Extended Base
+
+; --------- Files ----------------------
+
+[Rockusb_Files_Driver]
+rockusb.sys,,,2
+
+;--------- Strings Section ---------------------------------------------------
+
+[Strings]
+Provider = "Fuzhou Rockchip"
+MfgName = "Fuzhou Rockchip"
+Rockusb_DeviceDesc = "Rockusb Device"
+DeviceClassName="Class for rockusb devices"
+Rockusb_SvcDesc = "Driver for Rockusb Device"
+DiskId1 = "Rockusb Device Installation Disk #1"
+
+REG_SZ                      = 0x00000000
+REG_MULTI_SZ                = 0x00010000
+REG_EXPAND_SZ               = 0x00020000
+REG_BINARY                  = 0x00000001
+REG_DWORD                   = 0x00010001
+REG_NONE                    = 0x00020001
+
+SERVICE_KERNEL_DRIVER       = 0x00000001
+SERVICE_FILE_SYSTEM_DRIVER  = 0x00000002
+SERVICE_ADAPTER             = 0x00000004
+SERVICE_RECOGNIZER_DRIVER   = 0x00000008
+
+SERVICE_BOOT_START          = 0x0
+SERVICE_SYSTEM_START        = 0x1
+SERVICE_AUTO_START          = 0x2
+SERVICE_DEMAND_START        = 0x3
+SERVICE_DISABLED            = 0x4
+
+SERVICE_ERROR_IGNORE        = 0x00000000
+SERVICE_ERROR_NORMAL        = 0x00000001
+SERVICE_ERROR_SEVERE        = 0x00000002
+SERVICE_ERROR_CRITICAL      = 0x00000003
+
+FLG_ADDREG_NOCLOBBER        = 0x00000002
+FLG_ADDREG_DELVAL           = 0x00000004
+FLG_ADDREG_APPEND           = 0x00000008
+FLG_ADDREG_KEYONLY          = 0x00000010
+FLG_ADDREG_OVERWRITEONLY    = 0x00000020
+FLG_ADDREG_64BITKEY         = 0x00001000
+FLG_ADDREG_KEYONLY_COMMON   = 0x00002000
+FLG_ADDREG_32BITKEY         = 0x00004000
