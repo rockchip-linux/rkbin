@@ -1,0 +1,39 @@
+    firmware_merger read setting.ini to get partition info and create firmware.firmware_merger can generate 
+three kinds of firmware(1.flat rk firmware 2.flat gpt firmware 3.compact gpt firmware).flat firmware can be
+directly written into flash by 'wl'command.Compact firmware can only be written by productiontool. when SPL
+is rk miniloader,firmware use flat rk format.when SPL is u-boot,firmware use flat gpt. 
+
+follow us to config settting.ini:
+1.set format of firmware
+Gpt_Enable= /*flat rk firmware*/
+Gpt_Enable=0 /*flat gpt firmware*/
+Gpt_Enable=1 /*compact gpt firmware*/
+
+2.backup header of firmware or not
+Backup_Partition_Enable=1 /*backup firmware header*/
+Backup_Partition_Enable= /*default,no backup firmware header,when you don't know flash size,no backup*/
+
+3.idblock partition (must be first partition)
+Name=IDBlock /*partition name,fixed 'IDBlock'*/
+Type=0x2     /*partition type,fixed=2*/
+PartOffset=0x40 /*partition offset,fixed=0x40*/
+PartSize=0x400  /*partition size,must be smaller than 2M*/
+Flag=           /*partition flag,default value*/        
+File=Image/FlashData.bin,Image/FlashBoot.bin /*ddr_init.bin,loader.bin*/
+
+4.layout other partition sequentially,four case to config
+a.written partition file and fill up to partition size
+Flag=
+File=partition file
+
+b.partition be filled up to partition size
+Flag=0x2
+File=/*do not set*/
+
+c.skip,none of data be written to partition
+Flag=0x1
+File=/*do not set*/
+
+d.last partition,partition size be set at runtime,alloc all of remain flash to it
+Flag=0x4
+File=/*set file as required*/
