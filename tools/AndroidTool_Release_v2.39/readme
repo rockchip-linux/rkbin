@@ -44,3 +44,5 @@ Address  Name       Path
 0x6000   atf     -- out/u-boot/trust.img
 0x8000   boot    -- out/u-boot/trust.img
 0x40000  rootfs  -- out/u-boot/trust.img
+
+Use the Tool default config is well
