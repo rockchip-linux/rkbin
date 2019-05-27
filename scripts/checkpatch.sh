@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-BIN_PATH_FIXUP="--replace tools/rk_tools/ ./"
 
 pack_loader_image()
 {
@@ -19,7 +18,7 @@ pack_loader_image()
 			fi
 
 			echo "pack Input: $ini"
-			./tools/boot_merger ${BIN_PATH_FIXUP} $ini
+			./tools/boot_merger $ini
 			rm *loader*.bin
 			echo
 		fi
@@ -66,7 +65,7 @@ pack_trust_image()
 	do
 		if [ -f "$ini" ]; then
 			echo "pack Input: $ini"
-			./tools/trust_merger ${BIN_PATH_FIXUP} $ini
+			./tools/trust_merger $ini
 			rm trust*.img
 			echo
 		fi
