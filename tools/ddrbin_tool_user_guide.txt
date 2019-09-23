@@ -1,0 +1,29 @@
+1. modify "ddrbin_param.txt", choose ddr frequency, uart info.
+2. run "ddrbin_tool" with argument 1: ddrbin_param.txt, argument 2: ddr bin file.
+   like: ./ddrbin_tool ddrbin_param.txt px30_ddr_333MHz_v1.13.bin
+
+support following chip:
+PX30：ddr bin version should be released later than V1.11.  Support modify uart info only.
+RK1808: ddr bin version should be released later than V1.03. Support modify uart info and ddr frequency. ddr freq should be one of 333,400,533,666,786,933.
+RK322x: ddr bin version should be released later than V1.08. Support modify uart info and ddr frequency. These is no limit to ddr frequency.
+RK322xh: ddr bin version should be released later than V1.14. Support modify uart info only.
+RK3288:  ddr bin version should be released later than V1.07. Support modify uart info only.
+RK3308: ddr bin version should be released later than V1.28. Support modify uart info and ddr frequency. ddr freq should be one of 225,294,393,451,589.
+RK3326：ddr bin version should be released later than V1.11.  Support modify uart info only.
+RK3368: ddr bin version should be released later than V2.04. Support modify uart info and ddr frequency. These is no limit to ddr frequency.
+RK3328: ddr bin version should be released later than V1.14. Support modify uart info only.
+RK3399: ddr bin version should be released later than V1.20. Support modify uart info only.
+RK3399PRO NPU: ddr bin version should be released later than V1.03. Support modify uart info and ddr frequency. ddr freq should be one of 333,400,533,666,786,933.
+
+ddrbin_param.txt:
+start tag: keep default value. Do not modify it.
+ddr2_freq： ddr2 frequency,  unit:MHz.
+lp2_freq：lpddr2 frequency,  unit:MHz.
+ddr3_freq：ddr3 frequency,  unit:MHz.
+lp3_freq：lpddr3 frequency,  unit:MHz.
+ddr4_freq：ddr4 frequency,  unit:MHz.
+lp4_freq：lpddr4 frequency,  unit:MHz.
+
+uart id：uart number. 0 for uart0, 1 for uart1, 2 for uart2..., 0xf will disable uart.
+uart iomux：uart iomux info, 0 for uartn_m0, 1 for uartn_m1, 2 for uartn_m2...(like uart2_m0, uart2_m1,uart2_m2), Or 0 for uartn_a, 1 for uartn_b, 2 for uartn_c.(like uar2a, uart2b, uart2c).
+uart baudrate：uart baudrate should be 115200 or 1500000.

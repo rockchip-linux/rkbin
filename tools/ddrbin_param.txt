@@ -1,0 +1,13 @@
+start tag=0x12345678
+ddr2_freq=0
+lp2_freq=0
+ddr3_freq=0
+lp3_freq=0
+ddr4_freq=0
+lp4_freq=0
+
+uart id=0
+uart iomux=0
+uart baudrate=0
+
+end
