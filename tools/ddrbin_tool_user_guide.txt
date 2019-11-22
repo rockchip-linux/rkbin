@@ -24,6 +24,11 @@ lp3_freq：lpddr3 frequency,  unit:MHz.
 ddr4_freq：ddr4 frequency,  unit:MHz.
 lp4_freq：lpddr4 frequency,  unit:MHz.
 
+If ddr*_freq/lp*_freq is set to 0, it's frequency will keep the same with the ddr bin frequency.
+
 uart id：uart number. 0 for uart0, 1 for uart1, 2 for uart2..., 0xf will disable uart.
-uart iomux：uart iomux info, 0 for uartn_m0, 1 for uartn_m1, 2 for uartn_m2...(like uart2_m0, uart2_m1,uart2_m2), Or 0 for uartn_a, 1 for uartn_b, 2 for uartn_c.(like uar2a, uart2b, uart2c).
+uart iomux：uart iomux info, 0 for uartn_m0, 1 for uartn_m1, 2 for uartn_m2...(like uart2_m0, uart2_m1,uart2_m2),
+Or 1 for uartn_a, 2 for uartn_b, 3 for uartn_c.(like uar2a, uart2b, uart2c).
 uart baudrate：uart baudrate should be 115200 or 1500000.
+
+If both  of uart id, uart iomux and uart baudrate are set to 0, uart info will keep the same with ddr bin config.
