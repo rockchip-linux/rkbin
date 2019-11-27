@@ -17,6 +17,10 @@ pack_loader_image()
 				continue;
 			fi
 
+			if grep  -q '^PATH=img/' $ini; then
+				continue;
+			fi
+
 			echo "pack Input: $ini"
 			./tools/boot_merger $ini
 			rm *loader*.bin
@@ -33,6 +37,10 @@ pack_trust_image()
 	files=`ls ./RKTRUST/*TOS*.ini`
 	for ini in $files
 	do
+		if grep  -q '^PATH=img/' $ini; then
+			continue;
+		fi
+
 		if [ -f "$ini" ]; then
 			echo "pack Input: $ini"
 
@@ -63,6 +71,10 @@ pack_trust_image()
 	files=`ls ./RKTRUST/*TRUST*.ini`
 	for ini in $files
 	do
+		if grep  -q '^PATH=img/' $ini; then
+			continue;
+		fi
+
 		if [ -f "$ini" ]; then
 			echo "pack Input: $ini"
 			./tools/trust_merger $ini
