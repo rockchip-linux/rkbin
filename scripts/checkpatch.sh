@@ -6,23 +6,23 @@ pack_loader_image()
 	local files ini
 
 	files=`ls ./RKBOOT/*MINIALL*.ini`
-	for ini in $files
+	for ini in ${files}
 	do
-		if [ -f "$ini" ]; then
+		if [ -f "${ini}" ]; then
 			# Ignore unused
-			if [ "$ini" = "./RKBOOT/RK302AMINIALL.ini" -o \
-				 "$ini" = "./RKBOOT/RK30BMINIALL.ini" -o \
-				 "$ini" = "./RKBOOT/RK30MINIALL.ini" -o \
-				 "$ini" = "./RKBOOT/RK310BMINIALL.ini" ]; then
+			if [ "${ini}" = "./RKBOOT/RK302AMINIALL.ini" -o \
+				 "${ini}" = "./RKBOOT/RK30BMINIALL.ini" -o \
+				 "${ini}" = "./RKBOOT/RK30MINIALL.ini" -o \
+				 "${ini}" = "./RKBOOT/RK310BMINIALL.ini" ]; then
 				continue;
 			fi
 
-			if grep  -q '^PATH=img/' $ini; then
+			if grep  -q '^PATH=img/' ${ini}; then
 				continue;
 			fi
 
-			echo "pack Input: $ini"
-			./tools/boot_merger $ini
+			echo "pack Input: ${ini}"
+			./tools/boot_merger ${ini}
 			rm *loader*.bin
 			echo
 		fi
@@ -35,29 +35,29 @@ pack_trust_image()
 
 # Pack 32-bit trust
 	files=`ls ./RKTRUST/*TOS*.ini`
-	for ini in $files
+	for ini in ${files}
 	do
-		if grep  -q '^PATH=img/' $ini; then
+		if grep  -q '^PATH=img/' ${ini}; then
 			continue;
 		fi
 
-		if [ -f "$ini" ]; then
-			echo "pack Input: $ini"
+		if [ -f "${ini}" ]; then
+			echo "pack Input: ${ini}"
 
 			# Parse orignal path
-			TOS=`sed -n "/TOS=/s/TOS=//p" $ini|tr -d '\r'`
-			TOS_TA=`sed -n "/TOSTA=/s/TOSTA=//p" $ini|tr -d '\r'`
+			TOS=`sed -n "/TOS=/s/TOS=//p" ${ini}|tr -d '\r'`
+			TOS_TA=`sed -n "/TOSTA=/s/TOSTA=//p" ${ini}|tr -d '\r'`
 
 			# replace "./tools/rk_tools/" with "./" to compatible legacy ini content of rkdevelop branch
 			TOS=$(echo ${TOS} | sed "s/tools\/rk_tools\//\.\//g")
 			TOS_TA=$(echo ${TOS_TA} | sed "s/tools\/rk_tools\//\.\//g")
 
-			if [ x$TOS_TA != x -a x$TOS != x ]; then
+			if [ x${TOS_TA} != x -a x${TOS} != x ]; then
 				./tools/loaderimage --pack --trustos ${TOS} ./trust.img 0x68400000
 				./tools/loaderimage --pack --trustos ${TOS_TA} ./trust_with_ta.img 0x68400000
-			elif [ $TOS ]; then
+			elif [ ${TOS} ]; then
 				./tools/loaderimage --pack --trustos ${TOS} ./trust.img 0x68400000
-			elif [ $TOS_TA ]; then
+			elif [ ${TOS_TA} ]; then
 				./tools/loaderimage --pack --trustos ${TOS_TA} ./trust.img 0x68400000
 			else
 				exit 1
@@ -69,15 +69,15 @@ pack_trust_image()
 
 # Pack 64-bit trust
 	files=`ls ./RKTRUST/*TRUST*.ini`
-	for ini in $files
+	for ini in ${files}
 	do
-		if grep  -q '^PATH=img/' $ini; then
+		if grep  -q '^PATH=img/' ${ini}; then
 			continue;
 		fi
 
-		if [ -f "$ini" ]; then
-			echo "pack Input: $ini"
-			./tools/trust_merger $ini
+		if [ -f "${ini}" ]; then
+			echo "pack Input: ${ini}"
+			./tools/trust_merger ${ini}
 			rm trust*.img
 			echo
 		fi
