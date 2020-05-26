@@ -84,12 +84,23 @@ pack_trust_image()
 	done
 }
 
+check_dirty()
+{
+	for file in `find -name '*spl*.bin' -o -name '*tpl*.bin' -o -name '*usbplug*.bin'`; do
+		if strings ${file} | grep '\-dirty ' ; then
+			echo "ERROR: ${file} is dirty"
+			exit 1
+		fi
+	done
+}
+
 finish()
 {
 	echo "Packing loader and trust successfully."
 	echo
 }
 
+check_dirty
 pack_loader_image
 pack_trust_image
 finish
