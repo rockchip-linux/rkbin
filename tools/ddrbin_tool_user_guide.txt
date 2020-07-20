@@ -14,6 +14,7 @@ RK3368: ddr bin version should be released later than V2.04. Support modify uart
 RK3328: ddr bin version should be released later than V1.14. Support modify uart info only. The ddr bin version V1.16 and later support DDR 2t info modification, only DDR3 support.
 RK3399: ddr bin version should be released later than V1.20. Support modify uart info only.
 RK3399PRO NPU: ddr bin version should be released later than V1.03. Support modify uart info and ddr frequency. ddr freq should be one of 333,400,533,666,786,933. The ddr bin version V1.03 and later support DDR 2t info modification, only DDR2/DDR3/DDR4 support.
+RV1126/RV1109: all of version. Support modify uart info and ddr frequency. ddr freq should be one of 330,396,528,664,784,924,1056. Support DDR 2t info modification, only DDR3/DDR4 support.
 
 ddrbin_param.txt:
 start tag: keep default value. Do not modify it.
@@ -35,3 +36,5 @@ If uart id/iomux/baudrate is no value, uart info will keep the same with ddr bin
 
 ddr_2t: ddr 2T timing mode. 1: enable ddr 2T, 0: disable ddr 2T.
 If 'ddr_2t' is no value, ddr_2t info will keep the same with ddr bin config.
+
+ddrx_fx_freq_mhz/lpx_fx_freq_mhz: ddr init will preinit these ddr frequencies. These frequencies correspond to the kernel frequency table.
