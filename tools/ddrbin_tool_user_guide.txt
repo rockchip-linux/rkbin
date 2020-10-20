@@ -37,4 +37,12 @@ If uart id/iomux/baudrate is no value, uart info will keep the same with ddr bin
 ddr_2t: ddr 2T timing mode. 1: enable ddr 2T, 0: disable ddr 2T.
 If 'ddr_2t' is no value, ddr_2t info will keep the same with ddr bin config.
 
-ddrx_fx_freq_mhz/lpx_fx_freq_mhz: ddr init will preinit these ddr frequencies. These frequencies correspond to the kernel frequency table.
+ddr2_f1_freq_mhz: ddr2 frequency number 1,  unit:MHz.
+ddr2_f2_freq_mhz: ddr2 frequency number 2,  unit:MHz.
+ddr2_f3_freq_mhz: ddr2 frequency number 3,  unit:MHz.
+ddr2_f4_freq_mhz: ddr2 frequency number 4,  unit:MHz.
+ddr2_f5_freq_mhz: ddr2 frequency number 5,  unit:MHz.
+...
+ddr*_f*_freq_mhz/lp*_f*_freq_mhz: Only RV1126/RV1109 used.The program will initialize dram by following order for example: ddr4_freq, ddr4_f1_freq_mhz, ddr4_f2_freq_mhz, ddr4_f3_freq_mhz, ddr4_f4_freq_mhz, ddr4_f5_freq_mhz.
+And the final frequency is ddr4_freq to boot system.
+The kernel dts ddr frequency table correspond to these frequencies.
