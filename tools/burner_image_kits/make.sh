@@ -39,14 +39,12 @@ function is_miniloader_or_update_or_parameter()
 		$boot_merger --unpack $1 > /dev/null
 		ddr=FlashData
 		spl=FlashBoot
-		gen_idblock $ddr $spl $src_path"/"idblock1.img
-		is_img_and_gen_file_from_src_2_dst idblock1.img
-		gen_idblock $ddr $spl $src_path"/"idblock2.img
-		is_img_and_gen_file_from_src_2_dst idblock2.img
-		gen_idblock $ddr $spl $src_path"/"idblock3.img
-		is_img_and_gen_file_from_src_2_dst idblock3.img
-		gen_idblock $ddr $spl $src_path"/"idblock4.img
-		is_img_and_gen_file_from_src_2_dst idblock4.img
+		gen_idblock $ddr $spl $src_path"/"idblock.img
+		is_img_and_gen_file_from_src_2_dst idblock.img
+		cat $dst_path"/"idblock.img >> $dst_path"/"idblocks.img
+		cat $dst_path"/"idblock.img >> $dst_path"/"idblocks.img
+		cat $dst_path"/"idblock.img >> $dst_path"/"idblocks.img
+		mv $dst_path"/"idblock.img $dst_path"/"idblock.img.bak
 		rm $src_path"/"idblock*.img
 		rm $ddr
 		rm $spl
