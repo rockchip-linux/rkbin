@@ -99,11 +99,12 @@ if [[ $is_slc_nand != 0 && $is_slc_nand != 1 ]]; then
 fi
 
 if [ $is_slc_nand -eq 1 ] ;then
-	if [[ $oob_size != 64 && $oob_size != 128 && oob_size != 256 ]]; then
+	if [[ $oob_size != 64 && $oob_size != 128 && $oob_size != 224 && $oob_size != 256 ]]; then
 	echo "param oob_size: $oob_size not support!"
 	echo "support:"
 	echo "  64(B)"
 	echo "  128(B)"
+	echo "  224(B)"
 	echo "  256(B)"
 	exit
 fi
