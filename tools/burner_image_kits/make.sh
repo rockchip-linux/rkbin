@@ -40,7 +40,7 @@ function is_miniloader_or_update_or_parameter()
 		ddr=FlashData
 		spl=FlashBoot
 		gen_idblock $ddr $spl $src_path"/"idblock.img
-		is_img_and_gen_file_from_src_2_dst idblock.img
+		is_img_and_gen_file_from_src_2_dst $src_path"/"idblock.img idblock.img
 		cat $dst_path"/"idblock.img >> $dst_path"/"idblocks.img
 		cat $dst_path"/"idblock.img >> $dst_path"/"idblocks.img
 		cat $dst_path"/"idblock.img >> $dst_path"/"idblocks.img
@@ -59,7 +59,7 @@ function is_miniloader_or_update_or_parameter()
 	ls $1 | grep "parameter.txt" > /dev/null
 	if [ $? -eq 0 ] ;then
 		$upgrade_tool gpt $1 $src_path"/"gpt.img > /dev/null
-		is_img_and_gen_file_from_src_2_dst gpt.img
+		is_img_and_gen_file_from_src_2_dst $src_path"/"gpt.img gpt.img
 		rm $src_path"/"gpt.img
 		ret=1
 	fi
@@ -67,15 +67,17 @@ function is_miniloader_or_update_or_parameter()
 	return $ret
 }
 
+# source file absolute direction and name
+# output name
 function is_img_and_gen_file_from_src_2_dst()
 {
-	ls $src_path"/"$1 | grep "img" > /dev/null
+	ls $1 | grep "img" > /dev/null
 	if [ $? -eq 0 ] ;then
-		$align_to_flash_block_size $src_path"/"$1 $dst_path"/"$1 $block_size
+		$align_to_flash_block_size $1 $dst_path"/"$2 $block_size
 		if [ $is_slc_nand -eq 1 ] ;then
-			$rk_bch $dst_path"/"$1 $dst_path"/"$1".bch" $page_size $oob_size 0
-			mv $dst_path"/"$1".bch" $dst_path"/"$1
-			echo "$src_path"/"$1: rk_bch: success!"
+			$rk_bch $dst_path"/"$2 $dst_path"/"$2".bch" $page_size $oob_size 0
+			mv  $dst_path"/"$2".bch" $dst_path"/"$2
+			echo "$1: rk_bch: success!"
 		fi
 	fi
 }
@@ -149,9 +151,17 @@ mkdir -p $dst_path
 for file in `ls -a $src_path`
 do
 	if [ -f $src_path"/"$file ] ;then
-		is_miniloader_or_update_or_parameter $src_path"/"$file
+		a=$src_path"/"$file
+		if [ -h $src_path"/"$file ]
+		then
+			a=$src_path"/"$file
+			b=`ls -ld $a|awk '{print $NF}'`
+			c=`ls -ld $a|awk '{print $(NF-2)}'`
+			[[ $b =~ ^/ ]] && a=$b  || a=`dirname $c`/$b
+		fi
+		is_miniloader_or_update_or_parameter $a
 		if [ $? -eq 0 ] ;then
-			is_img_and_gen_file_from_src_2_dst $file
+			is_img_and_gen_file_from_src_2_dst $a $file
 		fi
 	fi
 done
