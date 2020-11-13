@@ -36,9 +36,9 @@ function is_miniloader_or_update_or_parameter()
 	ret=0
 	ls $1 | grep "MiniLoaderAll.bin" > /dev/null
 	if [ $? -eq 0 ] ;then
-		$boot_merger --unpack $1 > /dev/null
-		ddr=FlashData
-		spl=FlashBoot
+		$boot_merger unpack --loader $1 --output ./ > /dev/null
+		ddr=FlashData.bin
+		spl=FlashBoot.bin
 		gen_idblock $ddr $spl $src_path"/"idblock.img
 		is_img_and_gen_file_from_src_2_dst $src_path"/"idblock.img idblock.img
 		cat $dst_path"/"idblock.img >> $dst_path"/"idblocks.img
@@ -48,6 +48,7 @@ function is_miniloader_or_update_or_parameter()
 		rm $src_path"/"idblock*.img
 		rm $ddr
 		rm $spl
+
 		ret=1
 	fi
 
