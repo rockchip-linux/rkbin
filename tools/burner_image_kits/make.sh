@@ -23,7 +23,7 @@ function gen_idblock()
 {
 	$mkimage -n $soc -T rksd -d $1:$2 idblock1.img.temp > /dev/null
 	echo $3": gen_idblock: success!"
-	if [[ $is_slc_nand == 1 && $page_size == 4096 ]]; then
+	if [[ $page_size == 4096 ]]; then
 		$transfer_4K_2_2K idblock1.img.temp $3
 		rm idblock1.img.temp
 	else
