@@ -9,6 +9,7 @@ page_size=$5
 oob_size=$6
 is_slc_nand=$7
 
+temp_path=./IMAGES_T
 ddr=
 spl=
 
@@ -36,19 +37,15 @@ function is_miniloader_or_update_or_parameter()
 	ret=0
 	ls $1 | grep "MiniLoaderAll.bin" > /dev/null
 	if [ $? -eq 0 ] ;then
-		$boot_merger unpack --loader $1 --output ./ > /dev/null
-		ddr=FlashData.bin
-		spl=FlashBoot.bin
-		gen_idblock $ddr $spl $src_path"/"idblock.img
-		is_img_and_gen_file_from_src_2_dst $src_path"/"idblock.img idblock.img
+		$boot_merger unpack --loader $1 --output $temp_path > /dev/null
+		ddr=$temp_path"/"FlashData.bin
+		spl=$temp_path"/"FlashBoot.bin
+		gen_idblock $ddr $spl $temp_path"/"idblock.img
+		is_img_and_gen_file_from_src_2_dst $temp_path"/"idblock.img idblock.img
 		cat $dst_path"/"idblock.img >> $dst_path"/"idblocks.img
 		cat $dst_path"/"idblock.img >> $dst_path"/"idblocks.img
 		cat $dst_path"/"idblock.img >> $dst_path"/"idblocks.img
 		mv $dst_path"/"idblock.img $dst_path"/"idblock.img.bak
-		rm $src_path"/"idblock*.img
-		rm $ddr
-		rm $spl
-
 		ret=1
 	fi
 
@@ -59,9 +56,8 @@ function is_miniloader_or_update_or_parameter()
 
 	ls $1 | grep "parameter.txt" > /dev/null
 	if [ $? -eq 0 ] ;then
-		$upgrade_tool gpt $1 $src_path"/"gpt.img > /dev/null
-		is_img_and_gen_file_from_src_2_dst $src_path"/"gpt.img gpt.img
-		rm $src_path"/"gpt.img
+		$upgrade_tool gpt $1 $temp_path"/"gpt.img > /dev/null
+		is_img_and_gen_file_from_src_2_dst $temp_path"/"gpt.img gpt.img
 		ret=1
 	fi
 
@@ -141,6 +137,11 @@ if [ -x "$dst_path" ]; then
 	rm -rf $dst_path
 fi
 
+if [ -x "$temp_path" ]; then
+	rm -rf $temp_path
+fi
+mkdir $temp_path
+
 dst_path=$dst_path"/"$page_size"B_"$block_size"KB"
 if [[ $is_slc_nand == 1 ]]; then
 	dst_path=$dst_path"_SLC"
@@ -153,16 +154,32 @@ for file in `ls -a $src_path`
 do
 	if [ -f $src_path"/"$file ] ;then
 		a=$src_path"/"$file
+		cp $a $temp_path"/"$file
+		# get soft link address
 		if [ -h $src_path"/"$file ]
 		then
 			a=$src_path"/"$file
 			b=`ls -ld $a|awk '{print $NF}'`
 			c=`ls -ld $a|awk '{print $(NF-2)}'`
 			[[ $b =~ ^/ ]] && a=$b  || a=`dirname $c`/$b
+			cp -f $a $temp_path"/"$file
 		fi
-		is_miniloader_or_update_or_parameter $a
+		#get internal address
+		filesize=`stat -c "%s" $a`
+		if [[ $filesize -lt 256 ]]; then
+			line=`sed -n '1p' $a`
+			if [ -f $line ] ;then
+				cp $line $temp_path"/"$file
+			else
+				echo "error: $file first line '$line' is not exit!"
+			fi
+		fi
+		is_miniloader_or_update_or_parameter $temp_path"/"$file
 		if [ $? -eq 0 ] ;then
-			is_img_and_gen_file_from_src_2_dst $a $file
+			is_img_and_gen_file_from_src_2_dst $temp_path"/"$file $file
 		fi
 	fi
 done
+
+echo "rm -rf $temp_path"
+rm -rf $temp_path
