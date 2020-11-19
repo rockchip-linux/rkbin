@@ -7,7 +7,7 @@ PX30: ddr bin version should be released later than V1.11.  Support modify uart 
 RK1808: ddr bin version should be released later than V1.03. Support modify uart info and ddr frequency. ddr freq should be one of 333,400,533,666,786,933. The ddr bin version V1.03 and later support DDR 2t info modification, only DDR2/DDR3/DDR4 support.
 RK322x: ddr bin version should be released later than V1.08. Support modify uart info and ddr frequency. These is no limit to ddr frequency. The ddr bin version V1.09 and later support DDR 2t info modification, only DDR2/DDR3 support.
 RK322xh: ddr bin version should be released later than V1.14. Support modify uart info only. The ddr bin version V1.16 and later support DDR 2t info modification, only DDR3 support.
-RK3288:  ddr bin version should be released later than V1.07. Support modify uart info only. The ddr bin version V1.08 and later support DDR 2t info modification, only DDR3 support.
+RK3288:  ddr bin version should be released later than V1.09. Support modify uart info only. The ddr bin version V1.09 and later support DDR 2t info modification, only DDR3 support.
 RK3308: ddr bin version should be released later than V1.28. Support modify uart info and ddr frequency. ddr freq should be one of 225,294,393,451,589. The ddr bin version V1.29 and later support DDR 2t info modification, only DDR2/DDR3 support.
 RK3326: ddr bin version should be released later than V1.11.  Support modify uart info only. The ddr bin version V1.12 and later support DDR 2t info modification, only DDR3 support.
 RK3368: ddr bin version should be released later than V2.04. Support modify uart info and ddr frequency. These is no limit to ddr frequency. The ddr bin version V2.05 and later support DDR 2t info modification, only DDR3 support.
