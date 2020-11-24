@@ -44,13 +44,13 @@ arguments:
 --output       output dir for saving files
 """
 import argparse, sys, os, struct, datetime, io, platform, re, configparser, string,subprocess
-import  numpy as np
+#import  numpy as np
 from timeit import default_timer as timer
 from rk_mod import crc32,rc4
 from Crypto.Hash import SHA256,SHA512
 # from crcmod import crc32
 # from crcmod import rc4
-APP_VERSION = '%(prog)s v1.3'
+APP_VERSION = '%(prog)s v1.31'
 RKNONE_DEVICE = 0
 RK27_DEVICE = 0x10
 RKCAYMAN_DEVICE = 0x11
@@ -308,8 +308,8 @@ def create_new_idblock(in_files,keep_cert,hash_type,out_image):
         fout.write(idb)
 
 def convert_chip(chip):
-    value = np.int32(0)
-    chip_string = "".join(chip)
+    value = 0
+    chip_string = chip
     if (len(chip_string) < 4) or (len(chip_string) > 6):
         return -1
     head = chip_string[0:2]
@@ -347,26 +347,26 @@ def convert_chip(chip):
     else:
         j = 0
         for i,ch in enumerate(chip_string):
-            value += np.int32(ord(ch))
+            value += ord(ch)
             if i < 3:
-                value <<= np.int32(8)
+                value <<= 8
             j = j + 1
         while j < 3:
-            value <<= np.int32(8)
+            value <<= 8
             j = j + 1
-    return value
+    return value & 0xFFFFFFFF
 def is_hex_string(str):
     return all(s in string.hexdigits for s in str)
 def convert_loader_ver(ver):
     ver_value = ver.split('.')
     if len(ver_value) != 2:
-        return np.uint32(-1)
+        return -1
     if not (is_hex_string(ver_value[0]) and is_hex_string(ver_value[1])):
-        return np.uint32(-1)
-    loader_ver = np.uint32(int(ver_value[0], 10))
-    loader_ver = loader_ver << np.uint32(8)
-    loader_ver += np.uint32(int(ver_value[1], 10))
-    return loader_ver
+        return -1
+    loader_ver = int(ver_value[0], 10)
+    loader_ver = loader_ver << 8
+    loader_ver += int(ver_value[1], 10)
+    return loader_ver & 0xFFFFFFFF
 def boot_merger_main():
     total_start = timer()
     major = sys.version_info[0]
@@ -386,6 +386,7 @@ def boot_merger_main():
         if cmd.lower() == "pack":
             input_from_ini = False
             need_create_head = False
+            curr_head_tag = BOOT_TAG
             keep_sec_cert = False
             hash_type = 'sha256'
             in_chip_str = ''
@@ -547,15 +548,17 @@ def boot_merger_main():
                 print("invalid chip %s" % in_chip_str)
                 return
             loader_ver = convert_loader_ver(in_verion_str)
-            if loader_ver == np.uint32(-1):
+            if loader_ver == -1:
                 print("invalid loader ver %s" % in_verion_str)
                 return
             #1.fill up loader head
+            if need_create_head or len(in_loader_entry)>2:
+                curr_head_tag = LDR_TAG
             loader_head_size = struct.calcsize(RK_LOADER_HEAD_FORMAT)
             loader_head_buf = bytearray(loader_head_size)
             # loader_head_buf[0:] = [0 for i in range(loader_head_size)]
             loader_head_struct = list(struct.unpack(RK_LOADER_HEAD_FORMAT, loader_head_buf))
-            loader_head_struct[0] = LDR_TAG
+            loader_head_struct[0] = curr_head_tag
             loader_head_struct[3] = LDR_FORMAT_VER
             loader_head_struct[1] = loader_head_size
             loader_head_struct[2] = loader_ver
@@ -707,7 +710,7 @@ def boot_merger_main():
             fout.seek(0, io.SEEK_SET)
             new_loader_data = fout.read()
             crc = crc32(new_loader_data, 0)
-            fout.write(np.uint32(crc))
+            fout.write(crc.to_bytes(4,'little'))
             fout.close()
             print("pack loader ok.(%s)(%.2f)" % (os.path.basename(in_output),timer()-total_start))
         elif cmd.lower() == "unpack":
@@ -842,7 +845,7 @@ def boot_merger_main():
                 print("%s is not existed" % input_loader)
                 return
             loader_ver = convert_loader_ver(in_verion_str)
-            if loader_ver == np.uint32(-1):
+            if loader_ver == -1:
                 print("invalid loader ver %s" % in_verion_str)
                 return
             print("loader=%s" % input_loader)
@@ -874,7 +877,7 @@ def boot_merger_main():
                 fin.write(loader_data[0:head_size])
                 fin.seek(-4, io.SEEK_END)
                 crc = crc32(loader_data[:-4], 0)
-                fin.write(np.uint32(crc))
+                fin.write(crc.to_bytes(4,'little'))
                 print("change version of loader ok.")
         elif cmd.lower() == "ins_cert":
             parser = argparse.ArgumentParser(description='insert cert into rkloader', prog='boot_merger ins_cert')
@@ -967,7 +970,7 @@ def boot_merger_main():
                 fin.truncate(0)
                 fin.write(new_loader_data[:-4])
                 crc = crc32(new_loader_data[:-4], 0)
-                fin.write(np.uint32(crc))
+                fin.write(crc.to_bytes(4,'little'))
 
             print("insert cert  ok.")
         elif cmd.lower() == "del_cert":
@@ -1045,7 +1048,7 @@ def boot_merger_main():
                     fin.truncate(0)
                     fin.write(new_loader_data[:-4])
                     crc = crc32(new_loader_data[:-4], 0)
-                    fin.write(np.uint32(crc))
+                    fin.write(crc.to_bytes(4,'little'))
 
             print("delete cert  ok.")
         else:
