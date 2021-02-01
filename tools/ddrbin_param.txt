@@ -5,10 +5,15 @@ ddr3_freq=
 lp3_freq=
 ddr4_freq=
 lp4_freq=
+lp4x_freq=
 
 uart id=
 uart iomux=
 uart baudrate=
+
+ssmod_downspread=
+ssmod_div=
+ssmod_spread=
 
 ddr_2t=
 
@@ -47,5 +52,11 @@ lp4_f2_freq_mhz=
 lp4_f3_freq_mhz=
 lp4_f4_freq_mhz=
 lp4_f5_freq_mhz=
+
+lp4x_f1_freq_mhz=
+lp4x_f2_freq_mhz=
+lp4x_f3_freq_mhz=
+lp4x_f4_freq_mhz=
+lp4x_f5_freq_mhz=
 
 end

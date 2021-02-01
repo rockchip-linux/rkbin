@@ -3,18 +3,18 @@
    like: ./ddrbin_tool ddrbin_param.txt px30_ddr_333MHz_v1.13.bin
 
 support following chip:
-PX30: ddr bin version should be released later than V1.11.  Support modify uart info only. The ddr bin version V1.12 and later support DDR 2t info modification, only DDR3 support.
-RK1808: ddr bin version should be released later than V1.03. Support modify uart info and ddr frequency. ddr freq should be one of 333,400,533,666,786,933. The ddr bin version V1.03 and later support DDR 2t info modification, only DDR2/DDR3/DDR4 support.
+PX30: ddr bin version should be released later than V1.11.  Support modify uart info only. The ddr bin version V1.12 and later support DDR 2t info modification, only DDR3 support. The ddr bin version V1.16 and later support ssmod.
+RK1808: ddr bin version should be released later than V1.03. Support modify uart info and ddr frequency. ddr freq should be one of 333,400,533,666,786,933. The ddr bin version V1.03 and later support DDR 2t info modification, only DDR2/DDR3/DDR4 support. The ddr bin version V1.05 and later support ssmod.
 RK322x: ddr bin version should be released later than V1.08. Support modify uart info and ddr frequency. These is no limit to ddr frequency. The ddr bin version V1.09 and later support DDR 2t info modification, only DDR2/DDR3 support.
-RK322xh: ddr bin version should be released later than V1.14. Support modify uart info only. The ddr bin version V1.16 and later support DDR 2t info modification, only DDR3 support.
-RK3288:  ddr bin version should be released later than V1.09. Support modify uart info only. The ddr bin version V1.09 and later support DDR 2t info modification, only DDR3 support.
-RK3308: ddr bin version should be released later than V1.28. Support modify uart info and ddr frequency. ddr freq should be one of 225,294,393,451,589. The ddr bin version V1.29 and later support DDR 2t info modification, only DDR2/DDR3 support.
-RK3326: ddr bin version should be released later than V1.11.  Support modify uart info only. The ddr bin version V1.12 and later support DDR 2t info modification, only DDR3 support.
+RK322xh: ddr bin version should be released later than V1.14. Support modify uart info only. The ddr bin version V1.16 and later support DDR 2t info modification, only DDR3 support. The ddr bin version V1.17 and later support ssmod.
+RK3288:  ddr bin version should be released later than V1.07. Support modify uart info only. The ddr bin version V1.08 and later support DDR 2t info modification, only DDR3 support.
+RK3308: ddr bin version should be released later than V1.28. Support modify uart info and ddr frequency. ddr freq should be one of 393,451,589. The ddr bin version V1.29 and later support DDR 2t info modification, only DDR2/DDR3 support. The ddr bin version V1.31 and later support ssmod.
+RK3326: ddr bin version should be released later than V1.11.  Support modify uart info only. The ddr bin version V1.12 and later support DDR 2t info modification, only DDR3 support. The ddr bin version V1.16 and later support ssmod.
 RK3368: ddr bin version should be released later than V2.04. Support modify uart info and ddr frequency. These is no limit to ddr frequency. The ddr bin version V2.05 and later support DDR 2t info modification, only DDR3 support.
-RK3328: ddr bin version should be released later than V1.14. Support modify uart info only. The ddr bin version V1.16 and later support DDR 2t info modification, only DDR3 support.
-RK3399: ddr bin version should be released later than V1.20. Support modify uart info only.
-RK3399PRO NPU: ddr bin version should be released later than V1.03. Support modify uart info and ddr frequency. ddr freq should be one of 333,400,533,666,786,933. The ddr bin version V1.03 and later support DDR 2t info modification, only DDR2/DDR3/DDR4 support.
-RV1126/RV1109: all of version. Support modify uart info and ddr frequency. ddr freq should be one of 330,396,528,664,784,924,1056. Support DDR 2t info modification, only DDR3/DDR4 support.
+RK3328: ddr bin version should be released later than V1.14. Support modify uart info only. The ddr bin version V1.16 and later support DDR 2t info modification, only DDR3 support. The ddr bin version V1.17 and later support ssmod.
+RK3399: ddr bin version should be released later than V1.25. Support modify uart info only. The ddr bin version V1.25 and later support ssmod.
+RK3399PRO NPU: ddr bin version should be released later than V1.03. Support modify uart info and ddr frequency. ddr freq should be one of 333,400,533,666,786,933. The ddr bin version V1.03 and later support DDR 2t info modification, only DDR2/DDR3/DDR4 support. The ddr bin version V1.05 and later support ssmod.
+RV1126/RV1109: all of version. Support modify uart info and ddr frequency. ddr freq should be one of 330,396,528,664,784,924,1056. Support DDR 2t info modification, only DDR3/DDR4 support. The ddr bin version V1.05 and later support ssmod.
 
 ddrbin_param.txt:
 start tag: keep default value. Do not modify it.
@@ -24,13 +24,14 @@ ddr3_freq: ddr3 frequency,  unit:MHz.
 lp3_freq: lpddr3 frequency,  unit:MHz.
 ddr4_freq: ddr4 frequency,  unit:MHz.
 lp4_freq: lpddr4 frequency,  unit:MHz.
+lp4x_freq: lpddr4x frequency,  unit:MHz.
 
 If ddr*_freq/lp*_freq is no value, it's frequency will keep the same with the ddr bin frequency.
 
-uart id：uart number. 0 for uart0, 1 for uart1, 2 for uart2..., 0xf will disable uart.
-uart iomux：uart iomux info, 0 for uartn_m0, 1 for uartn_m1, 2 for uartn_m2...(like uart2_m0, uart2_m1,uart2_m2),
+uart id: uart number. 0 for uart0, 1 for uart1, 2 for uart2..., 0xf will disable uart.
+uart iomux: uart iomux info, 0 for uartn_m0, 1 for uartn_m1, 2 for uartn_m2...(like uart2_m0, uart2_m1,uart2_m2),
 Or 1 for uartn_a, 2 for uartn_b, 3 for uartn_c.(like uar2a, uart2b, uart2c).
-uart baudrate：uart baudrate should be 115200 or 1500000.
+uart baudrate: uart baudrate should be 115200 or 1500000.
 
 If uart id/iomux/baudrate is no value, uart info will keep the same with ddr bin config.
 
@@ -45,4 +46,9 @@ ddr2_f5_freq_mhz: ddr2 frequency number 5,  unit:MHz.
 ...
 ddr*_f*_freq_mhz/lp*_f*_freq_mhz: Only RV1126/RV1109 used.The program will initialize dram by following order for example: ddr4_freq, ddr4_f1_freq_mhz, ddr4_f2_freq_mhz, ddr4_f3_freq_mhz, ddr4_f4_freq_mhz, ddr4_f5_freq_mhz.
 And the final frequency is ddr4_freq to boot system.
-The kernel dts ddr frequency table correspond to these frequencies.
+The ddr frequency table in kernel dts/dtsi file need correspond to these frequencies.
+
+These parameters are about Spread Spectrum Modulator(ssmod) for PLL.
+ssmod_downspread: ssmod work mode. 0: down spread, 1: center spread.
+ssmod_div: Divider required to set the modulation frequency. RK3308 suggests to ssmod_div=2, others platforms suggest to ssmod_div=5.
+ssmod_spread: spread amplitude % = 0.1 * ssmod_spread; 0: disable ssmod, others will enable ssmod, max to 0x1f.
