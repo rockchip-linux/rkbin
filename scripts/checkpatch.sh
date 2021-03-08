@@ -94,6 +94,17 @@ check_dirty()
 	done
 }
 
+check_stripped()
+{
+	for elf in `find -name '*bl31*.elf'`; do
+		info=`file ${elf}`
+		if echo ${info} | grep -q "not stripped" ; then
+			echo "ERROR: ${elf} is not stripped"
+			exit 1
+		fi
+	done
+}
+
 finish()
 {
 	echo "Packing loader and trust successfully."
@@ -101,6 +112,7 @@ finish()
 }
 
 check_dirty
+check_stripped
 pack_loader_image
 pack_trust_image
 finish
