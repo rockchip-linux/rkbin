@@ -29,6 +29,8 @@ The detail information as following:
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+
 	|    RK3308     |   V1.28   |   V1.28  | V1.31 |  V1.29 | V1.30 |          X        |            X            |    X    |
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+
+	|    RK3308S    |   V2.05   |   V2.05  | V2.05 |  V2.05 | V2.05 |          X        |            X            |    X    |
+	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+
 	|    RK3368     |   V2.04   |   V2.04  |   X   |  V2.05 |   X   |          X        |            X            |    X    |
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+
 	|    RK3328     |   V1.14   |     X    | V1.17 |  V1.16 | V1.17 |          X        |            X            |    X    |
@@ -85,7 +87,7 @@ The 'X' as follows means not support change frequencies by tool.
 +---------------+-----------------------------------------------------------------+
 |    RK3288     |                                  X                              |
 +---------------+-----------------------------------------------------------------+
-|    RK3308     |               DDR2/LP2: 393,451; DDR3: 393,451,589              |
+| RK3308/RK3308S|               DDR2/LP2: 393,451; DDR3: 393,451,589              |
 +---------------+-----------------------------------------------------------------+
 |    RK3368     |        DDR3 not larger than 800, LP3 not larger than 666        |
 +---------------+-----------------------------------------------------------------+
@@ -141,7 +143,7 @@ ddr_2t: ddr 2T timing mode. 1: enable ddr 2T, 0: disable ddr 2T.
 
 These parameters are about Spread Spectrum Modulator(ssmod) for PLL.
 ssmod_downspread: ssmod work mode. 0: down spread, 1: center spread.
-ssmod_div: Divider required to set the modulation frequency. RK3308 suggests to ssmod_div=2, others platforms suggest to ssmod_div=5.
+ssmod_div: Divider required to set the modulation frequency. RK3308/RK3308S suggests to ssmod_div=2, others platforms suggest to ssmod_div=5.
 ssmod_spread: spread amplitude % = 0.1 * ssmod_spread; 0: disable ssmod, others will enable ssmod, max to 0x1f.
 
 * driver strength
