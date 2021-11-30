@@ -43,6 +43,8 @@ The detail information as following:
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+
 	| RK3566/RK3568 |   V1.00   |   V1.00  | V1.06 |  V1.00 | V1.00 |        V1.06      |          V1.07          |    X    |
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+
+	|    RK3588     |   V1.00   |   V1.00  |   X   |  V1.00 | V1.00 |        V1.00      |            X            |    X    |
+	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+
 
 * UART info
 
@@ -61,7 +63,7 @@ dis_cbt_for_lp4_lp4x: 1: will disbaled CBT for lp4/lp4x; 0: will enable CBT for 
 
 * DDR (final) freq
 
-For RV1126/RV1109, RK3566/RK3568, the frequencies as follows can choose to final freq in loader.
+For RV1126/RV1109, RK3566/RK3568, RK3588, the frequencies as follows can choose to final freq in loader.
 
 ddr2_freq: ddr2 frequency,  unit:MHz.
 lp2_freq: lpddr2 frequency,  unit:MHz.
@@ -70,6 +72,7 @@ lp3_freq: lpddr3 frequency,  unit:MHz.
 ddr4_freq: ddr4 frequency,  unit:MHz.
 lp4_freq: lpddr4 frequency,  unit:MHz.
 lp4x_freq: lpddr4x frequency,  unit:MHz.
+lp5_freq: lpddr5 frequency,  unit:MHz.
 
 The 'X' as follows means not support change frequencies by tool.
 +---------------+-----------------------------------------------------------------+
@@ -104,6 +107,8 @@ The 'X' as follows means not support change frequencies by tool.
 |    RK3568     |        DDR3/LP3: 324,396,528,630,780,920,1056,1184              |
 |               |   DDR4/LP4/LP4X: 324,396,528,630,780,920,1056,1184,1332,1560    |
 +---------------+-----------------------------------------------------------------+
+|    RK3588     |     LP4/LP4x [306.5MHz - 2133MHz]; LP5: [400MHz - 2750MHz]      |
++---------------+-----------------------------------------------------------------+
 
 * DDR frequencies(add more)
 
@@ -114,7 +119,8 @@ ddr2_f4_freq_mhz: ddr2 frequency number 4,  unit:MHz.
 ddr2_f5_freq_mhz: ddr2 frequency number 5,  unit:MHz.
 ...
 
-ddr*_f*_freq_mhz/lp*_f*_freq_mhz: Only RV1126/RV1109, RK3566/RK3568 used.The program will initialize dram by following order.
+ddr*_f*_freq_mhz/lp*_f*_freq_mhz: ddr*_f*_freq_mhz/lp*_f*_freq_mhz: Only RV1126/RV1109, RK3566/RK3568, RK3588 used.
+The program will initialize dram by following order.
 for example: ddr4_f1_freq_mhz --> ddr4_f2_freq_mhz --> ddr4_f3_freq_mhz --> ddr4_freq.
 And the final frequency is 'ddr4_freq' to boot system.
 So it is better to arrange the frequency values in order as above. That means the max freq is in final freq(lp*/ddr*_freq) and the min freq is in 'ddr*/lp*_f1_freq_mhz'.
@@ -243,3 +249,6 @@ lp4*_ca_vref_when_odten: The DRAM VrefCA when DRAM CA odt on. uint: parts per th
 phy_lp4_dq_vref_when_odtoff:  The PHY VrefDQ when PHY odt off. uint: parts per thousand.
 lp4_dq_vref_when_odtoff: The DRAM VrefDQ when DRAM DQ/DQS odt off. uint: parts per thousand.
 lp4_ca_vref_when_odtoff: The DRAM VrefCA when DRAM CA odt off. uint: parts per thousand.
+
+* hash info
+ch/bank/rank_mask*: is used to DDR address hash mask.

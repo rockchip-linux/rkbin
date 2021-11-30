@@ -7,6 +7,7 @@ lp3_freq=
 ddr4_freq=
 lp4_freq=
 lp4x_freq=
+lp5_freq=
 
 uart id=
 uart iomux=
@@ -20,6 +21,7 @@ channel mask=
 stride type=
 standby_idle=
 
+dis_cbt_for_lp4_lp4x=
 dis_printf_training=
 
 ssmod_downspread=
@@ -252,5 +254,58 @@ lp4x_ca_vref_when_odten=
 phy_lp4x_dq_vref_when_odtoff=
 lp4x_dq_vref_when_odtoff=
 lp4x_ca_vref_when_odtoff=
+
+lp5_f1_freq_mhz=
+lp5_f2_freq_mhz=
+lp5_f3_freq_mhz=
+lp5_f4_freq_mhz=
+lp5_f5_freq_mhz=
+phy_lp5_dq_drv_when_odten_ohm=
+phy_lp5_ca_drv_when_odten_ohm=
+phy_lp5_clk_drv_when_odten_ohm=
+lp5_dq_drv_when_odten_ohm=
+phy_lp5_dq_drv_when_odtoff_ohm=
+phy_lp5_ca_drv_when_odtoff_ohm=
+phy_lp5_clk_drv_when_odtoff_ohm=
+lp5_dq_drv_when_odtoff_ohm=
+phy_lp5_odt_ohm=
+lp5_odt_ohm=
+lp5_ca_odt_ohm=
+lp5_drv_pu_cal_odten=
+lp5_drv_pu_cal_odtoff=
+phy_lp5_drv_pull_dn_en_odten=
+phy_lp5_drv_pull_dn_en_odtoff=
+phy_lp5_odten_freq_mhz=
+lp5_dq_odten_freq_mhz=
+phy_lp5_dq_sr_when_odten=
+phy_lp5_ca_sr_when_odten=
+phy_lp5_clk_sr_when_odten=
+phy_lp5_dq_sr_when_odtoff=
+phy_lp5_ca_sr_when_odtoff=
+phy_lp5_clk_sr_when_odtoff=
+lp5_ca_odten_freq_mhz=
+lp5_wck_odt_en_freq=
+lp5_wck_odt=
+phy_lp5_cs_drv_odten=
+phy_lp5_cs_drv_odtoff=
+lp5_odte_ck=
+lp5_odte_cs_en=
+lp5_odtd_ca_en=
+lp5_nt_odt=
+phy_lp5_dq_vref_when_odten=
+lp5_dq_vref_when_odten=
+lp5_ca_vref_when_odten=
+phy_lp5_dq_vref_when_odtoff=
+lp5_dq_vref_when_odtoff=
+lp5_ca_vref_when_odtoff=
+
+ch_mask0=
+ch_mask1=
+bank_mask0=
+bank_mask1=
+bank_mask2=
+bank_mask3=
+rank_mask0=
+rank_mask1=
 
 end
