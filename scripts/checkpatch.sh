@@ -23,7 +23,7 @@ pack_loader_image()
 
 			echo "pack Input: ${ini}"
 			./tools/boot_merger ${ini}
-			rm *loader*.bin
+			rm -f *loader*.bin *download*.bin *idblock*.img
 			echo
 		fi
 	done
@@ -62,7 +62,7 @@ pack_trust_image()
 			else
 				exit 1
 			fi
-			rm trust*.img
+			rm -f trust*.img
 			echo
 		fi
 	done
