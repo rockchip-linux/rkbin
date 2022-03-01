@@ -37,6 +37,10 @@ pack_trust_image()
 	files=`ls ./RKTRUST/*TOS*.ini`
 	for ini in ${files}
 	do
+		if ! test -s ${ini}; then
+			continue;
+		fi
+
 		if grep  -q '^PATH=img/' ${ini}; then
 			continue;
 		fi
