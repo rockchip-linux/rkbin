@@ -39,9 +39,9 @@ pack_trust_image()
 	do
 		if ! test -s ${ini}; then
 			continue;
-		fi
-
-		if grep  -q '^PATH=img/' ${ini}; then
+		elif ! grep  -q '^TOS/' ${ini}; then
+			continue;
+		elif grep  -q '^PATH=img/' ${ini}; then
 			continue;
 		fi
 
