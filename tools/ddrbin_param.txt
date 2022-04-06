@@ -21,7 +21,11 @@ channel mask=
 stride type=
 standby_idle=
 
-dis_cbt_for_lp4_lp4x=
+rd_vref_scan_en=
+wr_vref_scan_en=
+eye_2d_scan_en=
+
+res_space_remap=
 dis_printf_training=
 
 ssmod_downspread=
