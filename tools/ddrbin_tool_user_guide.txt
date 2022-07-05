@@ -65,16 +65,16 @@ res_space_remap: 1: will remap pcie 100M reg to DDR memory space.
 2) wr_vref_scan_en: 1: enable vref scan and use scanning result for write.
 3) rd_vref_scan_en: 1: enable vref scan and use scanning result for read.
 
-* DDR (final) freq
+* DDR (final) freq(ddrx_f0_freq_mhz)
 
-ddr2_freq: ddr2 frequency,  unit:MHz.
-lp2_freq: lpddr2 frequency,  unit:MHz.
-ddr3_freq: ddr3 frequency,  unit:MHz.
-lp3_freq: lpddr3 frequency,  unit:MHz.
-ddr4_freq: ddr4 frequency,  unit:MHz.
-lp4_freq: lpddr4 frequency,  unit:MHz.
-lp4x_freq: lpddr4x frequency,  unit:MHz.
-lp5_freq: lpddr5 frequency,  unit:MHz.
+ddr2_freq(ddr2_f0_freq_mhz): ddr2 frequency,  unit:MHz.
+lp2_freq (lp2_f0_freq_mhz):  lpddr2 frequency,  unit:MHz.
+ddr3_freq(ddr3_f0_freq_mhz): ddr3 frequency,  unit:MHz.
+lp3_freq (lp3_f0_freq_mhz):  lpddr3 frequency,  unit:MHz.
+ddr4_freq(ddr4_f0_freq_mhz): ddr4 frequency,  unit:MHz.
+lp4_freq (lp4_f0_freq_mhz):  lpddr4 frequency,  unit:MHz.
+lp4x_freq(lp4x_f0_freq_mhz): lpddr4x frequency,  unit:MHz.
+lp5_freq (lp5_f0_freq_mhz):  lpddr5 frequency,  unit:MHz.
 
 For RV1126/RV1109, RK3566/RK3568, RK3588 those frequencies are the final freq in loader.
 
@@ -116,6 +116,7 @@ ddr2_f3_freq_mhz: ddr2 frequency number 3,  unit:MHz.
 ddr2_f4_freq_mhz: ddr2 frequency number 4,  unit:MHz.
 ddr2_f5_freq_mhz: ddr2 frequency number 5,  unit:MHz.
 ...
+The ddrx_f0_freq_mhz is named ddrx_freq.
 
 ddr*_f*_freq_mhz/lp*_f*_freq_mhz: Only RV1126/RV1109, RK3566/RK3568, RK3588 used.
 The program will initialize dram by following order.
