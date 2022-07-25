@@ -21,18 +21,36 @@ channel mask=
 stride type=
 standby_idle=
 
+ext_temp_ref_en=
+link_ecc_en=
+per_bank_ref_en=
+derate_en=
+auto_precharge_en=
+
+res_space_remap_all=
+res_space_remap_portion=
+
 rd_vref_scan_en=
 wr_vref_scan_en=
 eye_2d_scan_en=
 
-res_space_remap=
-dis_printf_training=
+dis_train_print=
 
 ssmod_downspread=
 ssmod_div=
 ssmod_spread=
 
 ddr_2t=
+
+pstore_base_addr=
+pstore_buf_size=
+uboot_log_en=
+atf_log_en=
+optee_log_en=
+spl_log_en=
+tpl_log_en=
+
+boot_fsp=
 
 ddr2_f1_freq_mhz=
 ddr2_f2_freq_mhz=
