@@ -1,6 +1,122 @@
 #!/bin/bash
 set -e
 
+DIFF_DOC_ALL="scripts/.diff_all.txt"
+DIFF_DOC_FIXED="scripts/.diff_fixed.txt"
+
+function check_doc()
+{
+	local TOP_SEVERITY LANGUAGE=$1
+
+	if [ "${LANGUAGE}" == "EN" ] ; then
+		SVT_CRITIAL="critical"
+		SVT_IMPORTANT="important"
+		SVT_MODERATE="moderate"
+		DOC=`git log -1 --name-only | sed -n "/_EN\.md/p"`
+	else
+		SVT_CRITIAL="紧急"
+		SVT_IMPORTANT="重要"
+		SVT_MODERATE="普通"
+		DOC=`git log -1 --name-only | sed -n "/_CN\.md/p"`
+	fi
+
+	echo "Checking doc: ${DOC}"
+
+	git show -1 ${DOC} | sed -n "/^+/p" > ${DIFF_DOC_ALL}
+	TITLE=`sed -n "/^+## /p" ${DIFF_DOC_ALL} | tr -d " +#"`
+	FILE=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $3 }'`
+	COMMIT=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $4 }'`
+	SEVERITY=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $5 }'`
+	HORIZONTAL_LINE=`sed -n "/^+------$/p" ${DIFF_DOC_ALL}`
+	# echo "### ${COMMIT}, ${SEVERITY}, ${TITLE}, ${FILE}"
+
+	# check standalone file
+	if ! echo ${FILE} | grep -q { ; then
+		if ! git log -1 --name-only | grep -q ${FILE}; then
+			echo "ERROR: ${DOC}: '${FILE}' is not update in this patch"
+			exit 1
+		fi
+	fi
+
+	# check title
+	if [ "${TITLE}" != "${FILE}" ]; then
+		echo "ERROR: ${DOC}: Title '${TITLE}' is not match with '${FILE}'"
+		exit 1
+	fi
+
+	# check commit
+	COMMIT=${COMMIT//#/ }
+	for LIST in ${COMMIT}; do
+		CMT=`echo ${LIST} | cut -d : -f 2`
+		if ! git log -1 | grep -q ${CMT} ; then
+			echo "ERROR: ${DOC}: '${CMT}' is not match in commit message"
+			exit 1
+		fi
+	done
+
+	# check severity
+	if [ "${SEVERITY}" != "${SVT_CRITIAL}" -a "${SEVERITY}" != "${SVT_IMPORTANT}" -a "${SEVERITY}" != "${SVT_MODERATE}" ]; then
+		echo "ERROR: ${DOC}: Unknown main severity: ${SEVERITY}"
+		exit 1
+	fi
+
+	# check horizontal line
+	if [ -z "${HORIZONTAL_LINE}" ]; then
+		echo "ERROR: ${DOC}: No horizontal line '------' at the last"
+		exit 1
+	fi
+
+	# check 'Fixed' content
+	if grep -q "^+### Fixed" ${DIFF_DOC_ALL} ; then
+		awk -v RS='### Fixed' 'END{printf "%s", $0}' ${DIFF_DOC_ALL} > ${DIFF_DOC_FIXED}
+		sed -i "/^$/d"    ${DIFF_DOC_FIXED}
+		sed -i "/Index/d" ${DIFF_DOC_FIXED}
+		sed -i "/---/d"   ${DIFF_DOC_FIXED}
+		sed -i "/^+$/d"   ${DIFF_DOC_FIXED}
+
+		while read LINE
+		do
+			EACH_SEVERITY=`echo "${LINE}" | awk -F "|" '{ print $3 }' | tr -d " "`
+			if [ "${EACH_SEVERITY}" != "${SVT_CRITIAL}" -a "${EACH_SEVERITY}" != "${SVT_IMPORTANT}" -a "${EACH_SEVERITY}" != "${SVT_MODERATE}" ]; then
+				echo "ERROR: ${DOC}: Unknown severity: ${EACH_SEVERITY}"
+				exit 1
+			fi
+
+			# echo "## EACH: $EACH_SEVERITY"
+			if [ -z "${TOP_SEVERITY}" ]; then
+				TOP_SEVERITY="${EACH_SEVERITY}"
+			elif [ "${TOP_SEVERITY}" == "${SVT_MODERATE}" ]; then
+				if [ "${EACH_SEVERITY}" == "${SVT_CRITIAL}" -o "${EACH_SEVERITY}" == "${SVT_IMPORTANT}" ]; then
+						TOP_SEVERITY="${EACH_SEVERITY}"
+				fi
+			elif [ "${TOP_SEVERITY}" == "${SVT_IMPORTANT}" ]; then
+				if [ "${EACH_SEVERITY}" == "${SVT_CRITIAL}" ]; then
+						TOP_SEVERITY="${EACH_SEVERITY}"
+				fi
+			fi
+		done < ${DIFF_DOC_FIXED}
+
+		if [ "${SEVERITY}" != "${TOP_SEVERITY}" ]; then
+			echo "ERROR: ${DOC}: Main severity should be '${TOP_SEVERITY}'"
+			exit 1
+		fi
+	fi
+}
+
+function check_docs()
+{
+	if git log -1 --name-only | grep -Eq '.bin|.elf' ; then
+		DOC_CN=`git log -1 --name-only | sed -n "/_CN\.md/p"`
+		DOC_EN=`git log -1 --name-only | sed -n "/_EN\.md/p"`
+		if [ -z "${DOC_CN}" -o -z "${DOC_EN}" ]; then
+			echo "ERROR: Update CN/EN Release-Note when .bin or .elf changes"
+			exit 1
+		fi
+		check_doc CN
+		check_doc EN
+	fi
+}
+
 function pack_loader_image()
 {
 	for FILE in `ls ./RKBOOT/*MINIALL*.ini`
@@ -75,8 +191,8 @@ function pack_trust_image()
 
 function check_dirty()
 {
-	for FILE in `find -name '*spl*.bin' -o -name '*tpl*.bin' -o -name '*usbplug*.bin'`; do
-		echo "Checking dirty: ${FILE}"
+	for FILE in `find -name '*spl*.bin' -o -name '*tpl*.bin' -o -name '*usbplug*.bin' -o -name '*bl31*.elf' -o -name '*bl32*.bin'`; do
+		echo "Checking clean: ${FILE}"
 		if strings ${FILE} | grep '\-dirty ' ; then
 			echo "ERROR: ${FILE} is dirty"
 			exit 1
@@ -96,12 +212,25 @@ function check_stripped()
 	done
 }
 
+function check_mode()
+{
+	echo "Checking file mode..."
+	if git whatchanged -1 --oneline | sed -n '/RKBOOT\//p; /RKTRUST\//p; /bin\//p; /doc\//p;' | awk '{ print $2 }' | grep -q 755 ; then
+		git whatchanged -1 --oneline | sed -n '/RKBOOT\//p; /RKTRUST\//p; /bin\//p; /doc\//p;' | grep 755
+		echo "ERROR: Set 644 permission but not 755."
+		exit 1
+	fi
+}
+
 function finish()
 {
-	echo "Packing loader and trust successfully."
+	rm -f ${DIFF_DOC_ALL} ${DIFF_DOC_FIXED}
+	echo "OK, everything is nice."
 	echo
 }
 
+check_mode
+check_docs
 check_dirty
 check_stripped
 pack_loader_image
