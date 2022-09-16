@@ -52,6 +52,16 @@ function check_doc()
 			echo "ERROR: ${DOC}: '${CMT}' is not match in commit message"
 			exit 1
 		fi
+
+		if ! echo ${FILE} | grep -q { ; then
+			if echo ${FILE} | grep -Eq 'spl_|tpl_|bl31_|bl32_|tee_' ; then
+				FILE_PATH=`find -name ${FILE}`
+				if ! strings ${FILE_PATH} | grep -q ${CMT} ; then
+					echo "ERROR: ${DOC}: ${FILE} is not build from '${CMT}'"
+					exit 1
+				fi
+			fi
+		fi
 	done
 
 	# check severity
@@ -105,7 +115,7 @@ function check_doc()
 
 function check_docs()
 {
-	if git log -1 --name-only | grep -Eq '.bin|.elf' ; then
+	if git log -1 --name-only | grep -Eq '\.bin|\.elf' ; then
 		DOC_CN=`git log -1 --name-only | sed -n "/_CN\.md/p"`
 		DOC_EN=`git log -1 --name-only | sed -n "/_EN\.md/p"`
 		if [ -z "${DOC_CN}" -o -z "${DOC_EN}" ]; then
