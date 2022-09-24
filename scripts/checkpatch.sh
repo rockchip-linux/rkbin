@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+DIFF_SUBSET="scripts/.diff_*"
 DIFF_DOC_ALL="scripts/.diff_all.txt"
 DIFF_DOC_FIXED="scripts/.diff_fixed.txt"
 
@@ -22,7 +23,17 @@ function check_doc()
 
 	echo "Checking doc: ${DOC}"
 
+	# check DOS encoding
 	git show -1 ${DOC} | sed -n "/^+/p" > ${DIFF_DOC_ALL}
+	git show -1 ${DOC} | sed -n "/^+/p" > ${DIFF_DOC_ALL}.dos
+	dos2unix ${DIFF_DOC_ALL}.dos >/dev/null 2>&1
+	CSUM1=`md5sum ${DIFF_DOC_ALL} | awk '{ print $1 }'`
+	CSUM2=`md5sum ${DIFF_DOC_ALL}.dos | awk '{ print $1 }'`
+	if [ "${CSUM1}" != "${CSUM2}" ]; then
+		echo "ERROR: ${DOC} is DOS encoding. Fix it by: 'dos2unix ${DOC}'"
+		exit 1
+	fi
+
 	TITLE=`sed -n "/^+## /p" ${DIFF_DOC_ALL} | tr -d " +#"`
 	FILE=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $3 }'`
 	COMMIT=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $4 }'`
@@ -125,6 +136,8 @@ function check_docs()
 		check_doc CN
 		check_doc EN
 	fi
+
+	rm -f ${DIFF_SUBSET}
 }
 
 function pack_loader_image()
@@ -234,7 +247,6 @@ function check_mode()
 
 function finish()
 {
-	rm -f ${DIFF_DOC_ALL} ${DIFF_DOC_FIXED}
 	echo "OK, everything is nice."
 	echo
 }
