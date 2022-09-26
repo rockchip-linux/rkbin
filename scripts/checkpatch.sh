@@ -34,6 +34,12 @@ function check_doc()
 		exit 1
 	fi
 
+	# check new content location
+	if ! grep -q 'Release Note' ${DIFF_DOC_ALL} ; then
+		echo "ERROR: ${DOC}: Adding new content at the beginning but not end"
+		exit 1
+	fi
+
 	TITLE=`sed -n "/^+## /p" ${DIFF_DOC_ALL} | tr -d " +#"`
 	FILE=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $3 }'`
 	COMMIT=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $4 }'`
