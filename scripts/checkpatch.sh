@@ -34,18 +34,25 @@ function check_doc()
 		exit 1
 	fi
 
-	# check new content location
-	if ! grep -q 'Release Note' ${DIFF_DOC_ALL} ; then
-		echo "ERROR: ${DOC}: Adding new content at the beginning but not end"
-		exit 1
-	fi
-
 	TITLE=`sed -n "/^+## /p" ${DIFF_DOC_ALL} | tr -d " +#"`
 	FILE=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $3 }'`
 	COMMIT=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $4 }'`
 	SEVERITY=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $5 }'`
 	HORIZONTAL_LINE=`sed -n "/^+------$/p" ${DIFF_DOC_ALL}`
 	# echo "### ${COMMIT}, ${SEVERITY}, ${TITLE}, ${FILE}"
+
+	# check new content location
+	if ! git show -1 ${DOC} | grep -q 'Release Note' ; then
+		echo "ERROR: ${DOC}: Adding new content at the top but not bottom"
+		exit 1
+	fi
+
+	# check TAB before index of 'New' body
+	if grep -q $'\t[0-9]' ${DOC} ; then
+		echo "ERROR: ${DOC}: Don't add TAB before index:"
+		grep $'\t[0-9]' ${DOC}
+		exit 1
+	fi
 
 	# check standalone file
 	if ! echo ${FILE} | grep -q { ; then
