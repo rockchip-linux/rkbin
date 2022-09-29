@@ -143,9 +143,15 @@ function check_docs()
 		DOC_CN=`git log -1 --name-only | sed -n "/_CN\.md/p"`
 		DOC_EN=`git log -1 --name-only | sed -n "/_EN\.md/p"`
 		if [ -z "${DOC_CN}" -o -z "${DOC_EN}" ]; then
-			echo "ERROR: Update CN/EN Release-Note when .bin or .elf changes"
+			echo "ERROR: Update CN/EN Release-Note when .bin or .elf change"
 			exit 1
 		fi
+
+		if ! which dos2unix > /dev/null 2>&1 ; then
+			echo "ERROR: No 'dos2unix'. Fix by: sudo apt-get install dos2unix"
+			exit 1
+		fi
+
 		check_doc CN
 		check_doc EN
 	fi
