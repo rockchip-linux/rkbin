@@ -57,7 +57,7 @@ function check_doc()
 	# check standalone file
 	if ! echo ${FILE} | grep -q { ; then
 		if ! git log -1 --name-only | grep -q ${FILE}; then
-			echo "ERROR: ${DOC}: '${FILE}' is not update in this patch"
+			echo "ERROR: ${DOC}: '${FILE}' is not updated in this patch"
 			exit 1
 		fi
 	fi
@@ -96,7 +96,7 @@ function check_doc()
 
 	# check horizontal line
 	if [ -z "${HORIZONTAL_LINE}" ]; then
-		echo "ERROR: ${DOC}: No horizontal line '------' at the last"
+		echo "ERROR: ${DOC}: No horizontal line '------' at the last of new content"
 		exit 1
 	fi
 
@@ -143,7 +143,7 @@ function check_docs()
 		DOC_CN=`git log -1 --name-only | sed -n "/_CN\.md/p"`
 		DOC_EN=`git log -1 --name-only | sed -n "/_EN\.md/p"`
 		if [ -z "${DOC_CN}" -o -z "${DOC_EN}" ]; then
-			echo "ERROR: Update CN/EN Release-Note when .bin or .elf change"
+			echo "ERROR: Update CN/EN Release-Note when .bin or .elf changed"
 			exit 1
 		fi
 
@@ -259,7 +259,7 @@ function check_mode()
 	echo "Checking file mode..."
 	if git whatchanged -1 --oneline | sed -n '/RKBOOT\//p; /RKTRUST\//p; /bin\//p; /doc\//p;' | awk '{ print $2 }' | grep -q 755 ; then
 		git whatchanged -1 --oneline | sed -n '/RKBOOT\//p; /RKTRUST\//p; /bin\//p; /doc\//p;' | grep 755
-		echo "ERROR: Set 644 permission but not 755."
+		echo "ERROR: Set 644 file permission but not 755."
 		exit 1
 	fi
 }
