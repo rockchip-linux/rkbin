@@ -42,6 +42,12 @@ function check_doc()
 	HORIZONTAL_LINE=`sed -n "/^+------$/p" ${DIFF_DOC_ALL}`
 	# echo "### ${COMMIT}, ${SEVERITY}, ${TITLE}, ${FILE}"
 
+	# check space
+	if sed -n "/##/p" ${DOC} | grep -v '## [a-z,A-Z]' ; then
+		echo "ERROR: ${DOC}: Should only 1 space between '#' and word"
+		exit 1
+	fi
+
 	# check new content location
 	if ! git show ${ARG_COMMIT} -1 ${DOC} | grep -q 'Release Note' ; then
 		echo "ERROR: ${DOC}: Adding new content at the top but not bottom"
