@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+ARG_COMMIT=$1
 DIFF_SUBSET="scripts/.diff_*"
 DIFF_DOC_ALL="scripts/.diff_all.txt"
 DIFF_DOC_FIXED="scripts/.diff_fixed.txt"
@@ -13,19 +14,19 @@ function check_doc()
 		SVT_CRITIAL="critical"
 		SVT_IMPORTANT="important"
 		SVT_MODERATE="moderate"
-		DOC=`git log -1 --name-only | sed -n "/_EN\.md/p"`
+		DOC=`git log ${ARG_COMMIT} -1 --name-only | sed -n "/_EN\.md/p"`
 	else
 		SVT_CRITIAL="紧急"
 		SVT_IMPORTANT="重要"
 		SVT_MODERATE="普通"
-		DOC=`git log -1 --name-only | sed -n "/_CN\.md/p"`
+		DOC=`git log ${ARG_COMMIT} -1 --name-only | sed -n "/_CN\.md/p"`
 	fi
 
 	echo "Checking doc: ${DOC}"
 
 	# check DOS encoding
-	git show -1 ${DOC} | sed -n "/^+/p" > ${DIFF_DOC_ALL}
-	git show -1 ${DOC} | sed -n "/^+/p" > ${DIFF_DOC_ALL}.dos
+	git show ${ARG_COMMIT} -1 ${DOC} | sed -n "/^+/p" > ${DIFF_DOC_ALL}
+	git show ${ARG_COMMIT} -1 ${DOC} | sed -n "/^+/p" > ${DIFF_DOC_ALL}.dos
 	dos2unix ${DIFF_DOC_ALL}.dos >/dev/null 2>&1
 	CSUM1=`md5sum ${DIFF_DOC_ALL} | awk '{ print $1 }'`
 	CSUM2=`md5sum ${DIFF_DOC_ALL}.dos | awk '{ print $1 }'`
@@ -42,7 +43,7 @@ function check_doc()
 	# echo "### ${COMMIT}, ${SEVERITY}, ${TITLE}, ${FILE}"
 
 	# check new content location
-	if ! git show -1 ${DOC} | grep -q 'Release Note' ; then
+	if ! git show ${ARG_COMMIT} -1 ${DOC} | grep -q 'Release Note' ; then
 		echo "ERROR: ${DOC}: Adding new content at the top but not bottom"
 		exit 1
 	fi
@@ -56,7 +57,7 @@ function check_doc()
 
 	# check standalone file
 	if ! echo ${FILE} | grep -q { ; then
-		if ! git log -1 --name-only | grep -q ${FILE}; then
+		if ! git log ${ARG_COMMIT} -1 --name-only | grep -q ${FILE}; then
 			echo "ERROR: ${DOC}: '${FILE}' is not updated in this patch"
 			exit 1
 		fi
@@ -72,14 +73,18 @@ function check_doc()
 	COMMIT=${COMMIT//#/ }
 	for LIST in ${COMMIT}; do
 		CMT=`echo ${LIST} | cut -d : -f 2`
-		if ! git log -1 | grep -q ${CMT} ; then
-			echo "ERROR: ${DOC}: '${CMT}' is not match in commit message"
+		if ! git log ${ARG_COMMIT} -1 | grep -q ${CMT} ; then
+			echo "ERROR: ${DOC}: '${CMT}' is not match in ARG_COMMIT message"
 			exit 1
 		fi
 
 		if ! echo ${FILE} | grep -q { ; then
 			if echo ${FILE} | grep -Eq 'spl_|tpl_|bl31_|bl32_|tee_' ; then
 				FILE_PATH=`find -name ${FILE}`
+				if [ -z "${FILE_PATH}" ]; then
+					echo "ERROR: ${DOC}: No ${FILE}"
+					exit 1
+				fi
 				if ! strings ${FILE_PATH} | grep -q ${CMT} ; then
 					echo "ERROR: ${DOC}: ${FILE} is not build from '${CMT}'"
 					exit 1
@@ -139,11 +144,11 @@ function check_doc()
 
 function check_docs()
 {
-	if git log -1 --name-only | grep -Eq '\.bin|\.elf' ; then
-		DOC_CN=`git log -1 --name-only | sed -n "/_CN\.md/p"`
-		DOC_EN=`git log -1 --name-only | sed -n "/_EN\.md/p"`
+	if git log ${ARG_COMMIT} -1 --name-only | grep -Eq '\.bin|\.elf' ; then
+		DOC_CN=`git log ${ARG_COMMIT} -1 --name-only | sed -n "/_CN\.md/p"`
+		DOC_EN=`git log ${ARG_COMMIT} -1 --name-only | sed -n "/_EN\.md/p"`
 		if [ -z "${DOC_CN}" -o -z "${DOC_EN}" ]; then
-			echo "ERROR: Update CN/EN Release-Note when .bin or .elf changed"
+			echo "ERROR: Should update CN and EN Release-Note when .bin/elf changed"
 			exit 1
 		fi
 
@@ -257,8 +262,8 @@ function check_stripped()
 function check_mode()
 {
 	echo "Checking file mode..."
-	if git whatchanged -1 --oneline | sed -n '/RKBOOT\//p; /RKTRUST\//p; /bin\//p; /doc\//p;' | awk '{ print $2 }' | grep -q 755 ; then
-		git whatchanged -1 --oneline | sed -n '/RKBOOT\//p; /RKTRUST\//p; /bin\//p; /doc\//p;' | grep 755
+	if git whatchanged ${ARG_COMMIT} -1 --oneline | sed -n '/RKBOOT\//p; /RKTRUST\//p; /bin\//p; /doc\//p;' | awk '{ print $2 }' | grep -q 755 ; then
+		git whatchanged ${ARG_COMMIT} -1 --oneline | sed -n '/RKBOOT\//p; /RKTRUST\//p; /bin\//p; /doc\//p;' | grep 755
 		echo "ERROR: Set 644 file permission but not 755."
 		exit 1
 	fi
