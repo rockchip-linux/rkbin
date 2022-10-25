@@ -1,5 +1,19 @@
 # PX30 Release Note
 
+## px30_bl31_v1.32.elf
+
+| Date       | file                | Build commit | Severity  |
+| ---------- | :------------------ | ------------ | --------- |
+| 2022-10-25 | px30_bl31_v1.32.elf | 6f45bba91    | important |
+
+### Fixed
+
+| Index | Severity  | Update                         | Issue description                     | Issue source |
+| ----- | --------- | ------------------------------ | ------------------------------------- | ------------ |
+| 1     | important | Compatible with the old loader | Boot fail if old loader+new trust.img | -            |
+
+------
+
 ## px30_bl32_v2.14.bin
 
 | Date       | File                | Build commit | Severity  |
