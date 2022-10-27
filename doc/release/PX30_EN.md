@@ -1,5 +1,17 @@
 # PX30 Release Note
 
+## px30_ddr_333MHz_v2.08.bin
+
+| Date       | file                      | Build commit | Severity |
+| ---------- | ------------------------- | ------------ | -------- |
+| 2022-10-27 | px30_ddr_333MHz_v2.08.bin | e5b9702      | moderate |
+
+### New
+
+1. reserved words for maskrom to add special parameters
+
+------
+
 ## px30_bl31_v1.32.elf
 
 | Date       | file                | Build commit | Severity  |
