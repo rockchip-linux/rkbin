@@ -69,6 +69,10 @@ function check_doc()
 	fi
 
 	# check standalone file
+	if ! echo ${FILE} | grep -Eq '\.bin|\.elf|\.img' ; then
+		echo "ERROR: ${DOC}: '${FILE}' missing the file format suffix"
+		exit 1
+	fi
 	if ! echo ${FILE} | grep -q { ; then
 		if ! git log ${ARG_COMMIT} -1 --name-only | grep -q ${FILE}; then
 			echo "ERROR: ${DOC}: '${FILE}' is not updated in this patch"
