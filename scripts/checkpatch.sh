@@ -42,6 +42,13 @@ function check_doc()
 	HORIZONTAL_LINE=`sed -n "/^+------$/p" ${DIFF_DOC_ALL}`
 	# echo "### ${COMMIT}, ${SEVERITY}, ${TITLE}, ${FILE}"
 
+	# check blank line after Heading 1
+	HEADING_1=`sed -n '1p' ${DOC}`
+	if sed -n '2p' ${DOC} | grep -q [a-z,A-Z] ; then
+		echo "ERROR: ${DOC}: Should reserve blank line after '${HEADING_1}'"
+		exit 1
+	fi
+
 	# check space
 	if sed -n "/##/p" ${DOC} | grep -v '## [a-z,A-Z]' ; then
 		echo "ERROR: ${DOC}: Should only 1 space between '#' and word"
