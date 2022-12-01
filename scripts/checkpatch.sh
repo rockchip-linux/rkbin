@@ -143,11 +143,11 @@ function check_doc()
 				TOP_SEVERITY="${EACH_SEVERITY}"
 			elif [ "${TOP_SEVERITY}" == "${SVT_MODERATE}" ]; then
 				if [ "${EACH_SEVERITY}" == "${SVT_CRITIAL}" -o "${EACH_SEVERITY}" == "${SVT_IMPORTANT}" ]; then
-						TOP_SEVERITY="${EACH_SEVERITY}"
+					TOP_SEVERITY="${EACH_SEVERITY}"
 				fi
 			elif [ "${TOP_SEVERITY}" == "${SVT_IMPORTANT}" ]; then
 				if [ "${EACH_SEVERITY}" == "${SVT_CRITIAL}" ]; then
-						TOP_SEVERITY="${EACH_SEVERITY}"
+					TOP_SEVERITY="${EACH_SEVERITY}"
 				fi
 			fi
 		done < ${DIFF_DOC_FIXED}
