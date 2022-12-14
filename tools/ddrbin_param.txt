@@ -50,6 +50,7 @@ optee_log_en=
 spl_log_en=
 tpl_log_en=
 
+pageclose=
 boot_fsp=
 
 ddr2_f1_freq_mhz=

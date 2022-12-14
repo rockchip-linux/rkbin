@@ -65,6 +65,7 @@ The detail information as following:
 | pstore base_addr/buf_size       | RK3588 V1.09                           |
 | uboot/atf/optee/spl/tpl log en  | RK3588 V1.09                           |
 | boot_fsp                        | RK3588 V1.09                           |
+| pageclose                       | RK3588 V1.10                           |
 
 * UART info
 
@@ -137,6 +138,10 @@ It is define the addr and size to save ddrbin log for last log.
 * tpl_log_en
 1: enable tpl log.
 0: disable tpl log.
+
+* pageclose
+1: enable pageclose.
+0: disable pageclose.
 
 * boot_fsp
 To choose the which DDR freq to boot system. 0 means fsp0_freq, 1 means fsp1_freq, 2 means fsp2_freq, 3 means fsp3_freq, the default is 0.
