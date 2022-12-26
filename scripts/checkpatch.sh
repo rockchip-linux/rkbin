@@ -68,6 +68,15 @@ function check_doc()
 		exit 1
 	fi
 
+	# check space after index of 'New' body
+	SUM1=`grep '^[0-9]\.' ${DOC} | wc -l`
+	SUM2=`grep '^[0-9]\.[[:blank:]]' ${DOC} | wc -l`
+	if [ "$SUM1" != "$SUM2" ]; then
+		echo "ERROR: ${DOC}: Please add space after index (e.g: '1. ' but not '1.'):"
+		grep '^+[0-9]\.' ${DIFF_DOC_ALL}
+		exit 1
+	fi
+
 	# check standalone file
 	if ! echo ${FILE} | grep -Eq '\.bin|\.elf|\.img' ; then
 		echo "ERROR: ${DOC}: '${FILE}' missing the file format suffix"
@@ -91,7 +100,7 @@ function check_doc()
 	for LIST in ${COMMIT}; do
 		CMT=`echo ${LIST} | cut -d : -f 2`
 		if ! git log ${ARG_COMMIT} -1 | grep -q ${CMT} ; then
-			echo "ERROR: ${DOC}: '${CMT}' is not match in ARG_COMMIT message"
+			echo "ERROR: ${DOC}: '${CMT}' is not match in commit message"
 			exit 1
 		fi
 
