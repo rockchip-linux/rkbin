@@ -5,6 +5,8 @@ ARG_COMMIT=$1
 DIFF_SUBSET="scripts/.diff_*"
 DIFF_DOC_ALL="scripts/.diff_all.txt"
 DIFF_DOC_FIXED="scripts/.diff_fixed.txt"
+LAST_SEVERITY=
+LAST_DOC=
 
 function check_doc()
 {
@@ -162,9 +164,35 @@ function check_doc()
 		done < ${DIFF_DOC_FIXED}
 
 		if [ "${SEVERITY}" != "${TOP_SEVERITY}" ]; then
-			echo "ERROR: ${DOC}: Main severity should be '${TOP_SEVERITY}'"
+			echo "ERROR: ${DOC}: Top severity should be '${TOP_SEVERITY}' as it's the highest level of all sub severity"
 			exit 1
 		fi
+
+		# check top severity miss match
+		if [ ! -z ${LAST_SEVERITY} ]; then
+			if [ "${LAST_SEVERITY}" == "普通" -a "${TOP_SEVERITY}" != "moderate" ]; then
+				MISS_MATCH="y"
+			elif [ "${LAST_SEVERITY}" == "重要" -a "${TOP_SEVERITY}" != "important" ]; then
+				MISS_MATCH="y"
+			elif [ "${LAST_SEVERITY}" == "紧急" -a "${TOP_SEVERITY}" != "critical" ]; then
+				MISS_MATCH="y"
+			elif [ "${LAST_SEVERITY}" == "moderate" -a "${TOP_SEVERITY}" != "普通" ]; then
+				MISS_MATCH="y"
+			elif [ "${LAST_SEVERITY}" == "important" -a "${TOP_SEVERITY}" != "重要" ]; then
+				MISS_MATCH="y"
+			elif [ "${LAST_SEVERITY}" == "critical" -a "${TOP_SEVERITY}" != "紧急" ]; then
+				MISS_MATCH="y"
+			fi
+
+			if [ ${MISS_MATCH} == "y" ]; then
+				echo "ERROR: ${DOC}: top Severity is '${SEVERITY}', while ${LAST_DOC}: top Severity is '${LAST_SEVERITY}'"
+				echo "       Available Severity types are: moderate(普通), important(重要), critical(紧急)"
+				exit 1
+			fi
+		fi
+
+		LAST_SEVERITY="${SEVERITY}"
+		LAST_DOC="${DOC}"
 	fi
 }
 
