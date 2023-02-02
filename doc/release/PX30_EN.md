@@ -1,5 +1,19 @@
 # PX30 Release Note
 
+## px30_bl31_v1.33.elf
+
+| Date       | file                | Build commit | Severity  |
+| ---------- | :------------------ | ------------ | --------- |
+| 2022-02-03 | px30_bl31_v1.33.elf | 0152b20d0    | important |
+
+### New
+
+1. Support AMP.
+2. Improve the stability of fiq-debugger.
+3. Support pll-deep-mode when system suspend.
+
+------
+
 ## px30_ddr_333MHz_v2.08.bin
 
 | Date       | file                      | Build commit | Severity |
