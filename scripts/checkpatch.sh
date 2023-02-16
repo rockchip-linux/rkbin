@@ -63,6 +63,17 @@ function check_doc()
 		exit 1
 	fi
 
+	# check title
+	if grep -Eq '### NEW|### new' ${DIFF_DOC_ALL} ; then
+		echo "ERROR: ${DOC}: Please use '### New'"
+		exit 1
+	fi
+
+	if grep -Eq '### FIXED|### fixed' ${DIFF_DOC_ALL} ; then
+		echo "ERROR: ${DOC}: Please use '### Fixed'"
+		exit 1
+	fi
+
 	# check TAB before index of 'New' body
 	if grep -q $'\t[0-9]' ${DOC} ; then
 		echo "ERROR: ${DOC}: Don't add TAB before index:"
@@ -226,6 +237,12 @@ function check_docs()
 		DOC_EN=`git log ${ARG_COMMIT} -1 --name-only | sed -n "/_EN\.md/p"`
 		if [ -z "${DOC_CN}" -o -z "${DOC_EN}" ]; then
 			echo "ERROR: Should update CN and EN Release-Note when .bin/elf changed"
+			exit 1
+		fi
+
+		NUM=`git log ${ARG_COMMIT} -1 --name-only | sed -n "/\.md/p" | wc -l`
+		if [ ${NUM} -gt 2 ]; then
+			echo "ERROR: More than 2 release note are updated"
 			exit 1
 		fi
 
