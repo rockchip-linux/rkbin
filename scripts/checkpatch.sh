@@ -70,6 +70,29 @@ function check_doc()
 		exit 1
 	fi
 
+	# check upper case and line end
+	if [ "${LANGUAGE}" == "EN" ] ; then
+		if grep -q '^[0-9]\. [a-z]' ${DOC} ; then
+			echo "ERROR: ${DOC}: Please use upper case of first word(i.e. \"1. add ..\" => \"1. Add ...\"):"
+			grep '^[0-9]\. [a-z]' ${DOC}
+			exit 1
+		fi
+
+		# check end with '.'
+		if sed -n '/^[0-9]\. [A-Z]/p' ${DOC} | grep -q '[^.]$' ; then
+			echo "ERROR: ${DOC}: Please end line with '.'"
+			grep '^[0-9]\. [A-Z]' ${DOC} | grep '[^.]$'
+			exit 1
+		fi
+	else
+		# check end with '。'
+		if sed -n '/^[0-9]\. /p' ${DOC} | grep -q '[^。]$' ; then
+			echo "ERROR: ${DOC}: Please end line with '。'"
+			grep '^[0-9]\. ' ${DOC} | grep '[^。]$'
+			exit 1
+		fi
+	fi
+
 	# check space after index of 'New' body
 	SUM1=`grep '^[0-9]\.' ${DOC} | wc -l`
 	SUM2=`grep '^[0-9]\.[[:blank:]]' ${DOC} | wc -l`
@@ -184,7 +207,7 @@ function check_doc()
 				MISS_MATCH="y"
 			fi
 
-			if [ ${MISS_MATCH} == "y" ]; then
+			if [ "${MISS_MATCH}" == "y" ]; then
 				echo "ERROR: ${DOC}: top Severity is '${SEVERITY}', while ${LAST_DOC}: top Severity is '${LAST_SEVERITY}'"
 				echo "       Available Severity types are: moderate(普通), important(重要), critical(紧急)"
 				exit 1
