@@ -10,7 +10,7 @@
 
 1. 添加amp支持。
 2. 提高fiq-debugger功能稳定性。
-3. 休眠时支持使用pll-deep-mode.
+3. 休眠时支持使用pll-deep-mode。
 
 ------
 
@@ -22,7 +22,7 @@
 
 ### New
 
-1. 预留一些空间给maskrom添加传递的参数
+1. 预留一些空间给maskrom添加传递的参数。
 
 ------
 

@@ -22,7 +22,7 @@
 
 ### New
 
-1. reserved words for maskrom to add special parameters
+1. Reserved words for maskrom to add special parameters.
 
 ------
 
