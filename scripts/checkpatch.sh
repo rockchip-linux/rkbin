@@ -179,7 +179,11 @@ function check_doc()
 		do
 			EACH_SEVERITY=`echo "${LINE}" | awk -F "|" '{ print $3 }' | tr -d " "`
 			if [ "${EACH_SEVERITY}" != "${SVT_CRITIAL}" -a "${EACH_SEVERITY}" != "${SVT_IMPORTANT}" -a "${EACH_SEVERITY}" != "${SVT_MODERATE}" ]; then
-				echo "ERROR: ${DOC}: Unknown severity: ${EACH_SEVERITY}"
+				if [ -z "${EACH_SEVERITY}" ]; then
+					echo "ERROR: ${DOC}: No severity found, please use Table to list what you '### Fixed'"
+				else
+					echo "ERROR: ${DOC}: Unknown severity: ${EACH_SEVERITY}"
+				fi
 				exit 1
 			fi
 
