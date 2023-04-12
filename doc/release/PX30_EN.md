@@ -4,7 +4,7 @@
 
 | Date       | file                | Build commit | Severity  |
 | ---------- | :------------------ | ------------ | --------- |
-| 2022-02-03 | px30_bl31_v1.33.elf | 0152b20d0    | important |
+| 2023-02-03 | px30_bl31_v1.33.elf | 0152b20d0    | important |
 
 ### New
 
