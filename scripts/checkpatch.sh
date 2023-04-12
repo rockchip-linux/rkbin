@@ -46,25 +46,25 @@ function check_doc()
 	END_LINE_3=`tail -n 3 ${DIFF_DOC_ALL} | sed -n '1p'`
 	END_LINE_2=`tail -n 3 ${DIFF_DOC_ALL} | sed -n '2p'`
 	END_LINE_1=`tail -n 3 ${DIFF_DOC_ALL} | sed -n '3p'`
-	HOST_YEAR=`date | awk '{ print $6 }'`
+	HOST_YEAR=`date +%Y`
 	# echo "### ${COMMIT}, ${SEVERITY}, ${TITLE}, ${FILE}"
 
 	# check blank line after Heading 1
 	HEADING_1=`sed -n '1p' ${DOC}`
 	if sed -n '2p' ${DOC} | grep -q [a-z,A-Z] ; then
-		echo "ERROR: ${DOC}: Should reserve blank line after '${HEADING_1}'"
+		echo "ERROR: ${DOC}: Please add blank line after '${HEADING_1}'"
 		exit 1
 	fi
 
 	# check space
 	if sed -n "/##/p" ${DOC} | grep -v '## [a-z,A-Z]' ; then
-		echo "ERROR: ${DOC}: Should only 1 space between '#' and word"
+		echo "ERROR: ${DOC}: Please only 1 space between '#' and word"
 		exit 1
 	fi
 
 	# check new content location
 	if ! git show ${ARG_COMMIT} -1 ${DOC} | grep -q 'Release Note' ; then
-		echo "ERROR: ${DOC}: Adding new content at the top but not bottom"
+		echo "ERROR: ${DOC}: Please add new content at the top but not bottom"
 		exit 1
 	fi
 
@@ -174,15 +174,15 @@ function check_doc()
 
 	# check horizontal line
 	if [ "${END_LINE_2}" != "+------" ]; then
-		echo "ERROR: ${DOC}: No horizontal line '------' found at the last of new content"
+		echo "ERROR: ${DOC}: Please add horizontal line '------' at the last of new content"
 		exit 1
 	fi
 	if [ "${END_LINE_3}" != "+" ]; then
-		echo "ERROR: ${DOC}: No blank line found before horizontal line '------'"
+		echo "ERROR: ${DOC}: Please add blank line before horizontal line '------'"
 		exit 1
 	fi
 	if [ "${END_LINE_1}" != "+" ]; then
-		echo "ERROR: ${DOC}: No blank line found after horizontal line '------'"
+		echo "ERROR: ${DOC}: Please add blank line after horizontal line '------'"
 		exit 1
 	fi
 
