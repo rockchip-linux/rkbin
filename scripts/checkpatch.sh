@@ -42,6 +42,7 @@ function check_doc()
 	COMMIT=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $4 }'`
 	SEVERITY=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $5 }'`
 	HORIZONTAL_LINE=`sed -n "/^+------$/p" ${DIFF_DOC_ALL}`
+	END_LINE=`tail -n 1 ${DIFF_DOC_ALL}`
 	# echo "### ${COMMIT}, ${SEVERITY}, ${TITLE}, ${FILE}"
 
 	# check blank line after Heading 1
@@ -164,6 +165,12 @@ function check_doc()
 	# check horizontal line
 	if [ -z "${HORIZONTAL_LINE}" ]; then
 		echo "ERROR: ${DOC}: No horizontal line '------' at the last of new content"
+		exit 1
+	fi
+
+	# check horizontal line
+	if [ "${END_LINE}" == "+------" ]; then
+		echo "ERROR: ${DOC}: No blank line after '------'"
 		exit 1
 	fi
 
