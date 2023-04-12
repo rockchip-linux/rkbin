@@ -38,11 +38,14 @@ function check_doc()
 	fi
 
 	TITLE=`sed -n "/^+## /p" ${DIFF_DOC_ALL} | tr -d " +#"`
+	DATE=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $2 }'`
+	YEAR=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $2 }' | awk -F "-" '{ print $1 }'`
 	FILE=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $3 }'`
 	COMMIT=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $4 }'`
 	SEVERITY=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $5 }'`
 	HORIZONTAL_LINE=`sed -n "/^+------$/p" ${DIFF_DOC_ALL}`
 	END_LINE=`tail -n 1 ${DIFF_DOC_ALL}`
+	HOST_YEAR=`date | awk '{ print $6 }'`
 	# echo "### ${COMMIT}, ${SEVERITY}, ${TITLE}, ${FILE}"
 
 	# check blank line after Heading 1
@@ -72,6 +75,12 @@ function check_doc()
 
 	if grep -Eq '### FIXED|### fixed' ${DIFF_DOC_ALL} ; then
 		echo "ERROR: ${DOC}: Please use '### Fixed'"
+		exit 1
+	fi
+
+	# check year
+	if [ "${HOST_YEAR}" != "${YEAR}" ]; then
+		echo "ERROR: ${DOC}: '${DATE}' is wrong, the year should be ${HOST_YEAR}"
 		exit 1
 	fi
 
