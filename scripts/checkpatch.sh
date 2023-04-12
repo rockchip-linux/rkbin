@@ -43,8 +43,9 @@ function check_doc()
 	FILE=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $3 }'`
 	COMMIT=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $4 }'`
 	SEVERITY=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $5 }'`
-	HORIZONTAL_LINE=`sed -n "/^+------$/p" ${DIFF_DOC_ALL}`
-	END_LINE=`tail -n 1 ${DIFF_DOC_ALL}`
+	END_LINE_3=`tail -n 3 ${DIFF_DOC_ALL} | sed -n '1p'`
+	END_LINE_2=`tail -n 3 ${DIFF_DOC_ALL} | sed -n '2p'`
+	END_LINE_1=`tail -n 3 ${DIFF_DOC_ALL} | sed -n '3p'`
 	HOST_YEAR=`date | awk '{ print $6 }'`
 	# echo "### ${COMMIT}, ${SEVERITY}, ${TITLE}, ${FILE}"
 
@@ -172,14 +173,16 @@ function check_doc()
 	fi
 
 	# check horizontal line
-	if [ -z "${HORIZONTAL_LINE}" ]; then
-		echo "ERROR: ${DOC}: No horizontal line '------' at the last of new content"
+	if [ "${END_LINE_2}" != "+------" ]; then
+		echo "ERROR: ${DOC}: No horizontal line '------' found at the last of new content"
 		exit 1
 	fi
-
-	# check horizontal line
-	if [ "${END_LINE}" == "+------" ]; then
-		echo "ERROR: ${DOC}: No blank line after '------'"
+	if [ "${END_LINE_3}" != "+" ]; then
+		echo "ERROR: ${DOC}: No blank line found before horizontal line '------'"
+		exit 1
+	fi
+	if [ "${END_LINE_1}" != "+" ]; then
+		echo "ERROR: ${DOC}: No blank line found after horizontal line '------'"
 		exit 1
 	fi
 
