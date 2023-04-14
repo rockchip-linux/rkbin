@@ -106,6 +106,12 @@ function check_doc()
 			grep '^[0-9]\. [A-Z]' ${DOC} | grep '[^.]$'
 			exit 1
 		fi
+
+		# check Chinese language
+		if grep -P '[\x{4e00}-\x{9fa5}]' ${DOC} ; then
+			echo "ERROR: ${DOC}: The Chinese language was found"
+			exit 1
+		fi
 	else
 		# check end with '。'
 		if sed -n '/^[0-9]\. /p' ${DOC} | grep -q '[^。]$' ; then
