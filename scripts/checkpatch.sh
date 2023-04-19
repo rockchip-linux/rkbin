@@ -69,6 +69,11 @@ function check_doc()
 	fi
 
 	# check title
+	if grep -Eq '### WARN|### WARNING|### Warning|### warn|### warning' ${DIFF_DOC_ALL} ; then
+		echo "ERROR: ${DOC}: Please use '### Warn'"
+		exit 1
+	fi
+
 	if grep -Eq '### NEW|### new' ${DIFF_DOC_ALL} ; then
 		echo "ERROR: ${DOC}: Please use '### New'"
 		exit 1
