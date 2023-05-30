@@ -51,7 +51,7 @@ The detail information as following:
 | ------------------------------- | -------------------------------------- |
 | first scan channel/channel mask | RK3588 V1.00/RK3399 V1.25/RK3288 V1.11 |
 | stride type                     | RK3588 V1.00/RK3399 V1.25/RK3288 V1.11 |
-| ext_temp_ref_en                 | Null                                   |
+| ext_temp_ref                    | Null                                   |
 | link_ecc_en                     | Null                                   |
 | per_bank_ref_en                 | RK3588 V1.09                           |
 | derate_en                       | RK3588 V1.09                           |
@@ -112,7 +112,12 @@ link_ecc_en: 1: read/write link ecc enable.
 
 * Extended temperature refresh
 
-ext_temp_ref_en: 1: will enable the extended temperature refresh which is 0.5x refresh operation in all time.
+ext_temp_ref:
+	0: ref1x for normal chip, 2x for 3568M/3568J
+	1: fix 2x ref for all chip
+	2: fix 4x ref for all chip
+	3: fix 1x ref for all chip
+Note: If derate-enabled DDR are configured with derate_en=1, the ext_temp_ref configuration does not take effect.
 
 * pstore_base_addr pstore_buf_size
 The pstore buffer base address: pstore_base_addr << 16, 64kB align.

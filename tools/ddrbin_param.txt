@@ -21,7 +21,7 @@ channel mask=
 stride type=
 standby_idle=
 
-ext_temp_ref_en=
+ext_temp_ref=
 link_ecc_en=
 per_bank_ref_en=
 derate_en=
