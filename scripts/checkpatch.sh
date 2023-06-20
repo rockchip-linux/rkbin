@@ -40,6 +40,7 @@ function check_doc()
 	TITLE=`sed -n "/^+## /p" ${DIFF_DOC_ALL} | tr -d " +#"`
 	DATE=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $2 }'`
 	YEAR=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $2 }' | awk -F "-" '{ print $1 }'`
+	MON=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $2 }' | awk -F "-" '{ print $2 }'`
 	FILE=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $3 }'`
 	COMMIT=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $4 }'`
 	SEVERITY=`sed -n "/^+| 20[0-9][0-9]-/p" ${DIFF_DOC_ALL} | tr -d " " | awk -F "|" '{ print $5 }'`
@@ -47,6 +48,7 @@ function check_doc()
 	END_LINE_2=`tail -n 3 ${DIFF_DOC_ALL} | sed -n '2p'`
 	END_LINE_1=`tail -n 3 ${DIFF_DOC_ALL} | sed -n '3p'`
 	HOST_YEAR=`date +%Y`
+	HOST_MON=`date +%m`
 	# echo "### ${COMMIT}, ${SEVERITY}, ${TITLE}, ${FILE}"
 
 	# check blank line after Heading 1
@@ -84,9 +86,14 @@ function check_doc()
 		exit 1
 	fi
 
-	# check year
+	# check year/month
 	if [ "${HOST_YEAR}" != "${YEAR}" ]; then
 		echo "ERROR: ${DOC}: '${DATE}' is wrong, the year should be ${HOST_YEAR}"
+		exit 1
+	fi
+
+	if [ "${HOST_MON}" != "${MON}" ]; then
+		echo "ERROR: ${DOC}: '${DATE}' is wrong, the month should be ${HOST_MON}"
 		exit 1
 	fi
 
