@@ -1,5 +1,17 @@
 # PX30 Release Note
 
+## px30_{usbplug, miniloader}_v1.37.bin
+
+| Date       | file                                   | Build commit | Severity |
+| ---------- | :------------------------------------- | ------------ | -------- |
+| 2023-08-01 | px30_{usbplug, miniloader}_v1.37.bin | c949b248     | moderate |
+
+### New
+
+1. Support SLC Nand secure boot.
+
+------
+
 ## px30_bl31_v1.33.elf
 
 | Date       | file                | Build commit | Severity  |
