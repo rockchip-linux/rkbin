@@ -1,5 +1,21 @@
 # RK3399PRO Release Note
 
+## rk3399pro_bl32_v2.11.bin
+
+| Date       | file                     | Build commit | Severity |
+| ---------- | ------------------------ | ------------ | -------- |
+| 2023-08-14 | rk3399pro_bl32_v2.11.bin | 44e25f04     | critical |
+
+### Fixed
+
+| Index | Severity  | Update                        | Issue description                                            | Issue source |
+| ----- | --------- | ----------------------------- | ------------------------------------------------------------ | ------------ |
+| 1     | critical  | Fix security vulnerabilities. | Hackers can exploit vulnerabilities to attack OPTEE OS.      | -            |
+| 2     | important | Fix memory leaks.             | Customer calls TEE_ DerivekeyFromHard may experience memory leakage issues. | 374096       |
+| 3     | important | Enable efuse dependent clock  | When program efuse, it relies on the saradc clock. Failure to turn on the clock may result in program efuse failure. |              |
+
+------
+
 ## rk3399pro_ddr_{666...933}MHz_v1.30.bin
 
 | Date       | file                                   | Build commit | Severity  |
