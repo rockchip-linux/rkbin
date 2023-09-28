@@ -416,7 +416,7 @@ function check_version()
 			continue
 		fi
 
-		NAME_VER=`echo ${FILE} | grep -o 'v[0-9].[0-9][0-9]'`
+		NAME_VER=`echo ${FILE} | grep -o 'v[0-9][.][0-9][0-9]'`
 		# ignore version < v1.00
 		if [[ "${NAME_VER}" == *v0.* ]]; then
 			continue
@@ -426,7 +426,7 @@ function check_version()
 			echo "ERROR: ${FILE}: No \"fwver: \" string found in binary"
 			exit 1
 		fi
-		FW_VER=`strings ${FILE} | grep -o 'fwver: v[1-9].[0-9][0-9]' | awk '{ print $2 }'`
+		FW_VER=`strings ${FILE} | grep -o 'fwver: v[1-9][.][0-9][0-9]' | awk '{ print $2 }'`
 		if [ "${NAME_VER}" != "${FW_VER}" ] ; then
 			echo "ERROR: ${FILE}: file version is ${NAME_VER}, but fw version is ${FW_VER}."
 			exit 1
