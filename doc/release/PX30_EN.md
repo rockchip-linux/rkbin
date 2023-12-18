@@ -1,5 +1,17 @@
 # PX30 Release Note
 
+## px30_ddr_333MHz_v2.09.bin
+
+| Date       | file                      | Build commit | Severity |
+| ---------- | ------------------------- | ------------ | -------- |
+| 2023-12-20 | px30_ddr_333MHz_v2.09.bin | 131f35b      | moderate |
+
+### New
+
+1. Add DQS weak pull up/down.
+
+------
+
 ## px30_bl31_v1.34.elf
 
 | Date       | file                | Build commit | Severity |
