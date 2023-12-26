@@ -1,5 +1,17 @@
 # PX30 Release Note
 
+## px30_bl31_v1.34.elf
+
+| Date       | file                | Build commit | Severity |
+| ---------- | ------------------- | ------------ | -------- |
+| 2023-12-26 | px30_bl31_v1.34.elf | 46064b2d5    | moderate |
+
+### New
+
+1. Support DDR Extended temperature range which should used with 2x, 4x refresh rate ddr bin file.
+
+------
+
 ## px30_bl32_v2.15.bin
 
 | Date       | File                | Build commit | Severity  |
