@@ -18,7 +18,7 @@ The detail information as following:
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+----------------------+
 	|    RV1108     |   V1.08   |   V1.08  | V1.10 |  V1.08 | V1.08 |          X        |            X            |    X    |          X           |
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+----------------------+
-	|  PX30/RK3326  |   V1.11   |     X    | V1.16 |  V1.12 | V1.15 |          X        |            X            |    X    |          X           |
+	|  PX30/RK3326  |   V1.11   |     X    |   X   |  V1.12 |   X   |          X        |            X            |    X    |          X           |
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+----------------------+
 	|    RK1808     |   V1.03   |   V1.03  | V1.05 |  V1.03 | V1.04 |          X        |            X            |    X    |          X           |
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+----------------------+
@@ -50,15 +50,17 @@ The detail information as following:
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+----------------------+
 	|    RK3562     |     X     |   V1.00  | V1.00 |  V1.00 | V1.00 |        V1.00      |          V1.00          |    X    |        V1.05         |
 	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+----------------------+
+	| RV1106/RV1103 |   V1.10   |   V1.10  | V1.10 |  V1.10 | V1.10 |          X        |            X            |    X    |          X           |
+	+---------------+-----------+----------+-------+--------+-------+-------------------+-------------------------+---------+----------------------+
 
 | function                              | platform and ddrbin version                |
 | ------------------------------------- | ------------------------------------------ |
 | first scan channel/channel mask       | RK3588 V1.00/RK3399 V1.25/RK3288 V1.11     |
 | stride type                           | RK3588 V1.00/RK3399 V1.25/RK3288 V1.11     |
-| ext_temp_ref                          | RK356x V1.16                               |
+| ext_temp_ref                          | RK356x V1.16/RK3528 V1.07/RK1808 V1.06     |
 | link_ecc_en                           | Null                                       |
 | per_bank_ref_en                       | RK3588 V1.09                               |
-| derate_en                             | RK3588 V1.09                               |
+| derate_en                             | RK3588 V1.09/RK356x V1.19/RK3528 V1.07     |
 | auto_precharge_en                     | Null                                       |
 | res_space_remap_portion               | RK3588 V1.09                               |
 | res_space_remap_all                   | RK3588 V1.09                               |
@@ -234,6 +236,8 @@ The 'X' as follows means not support change frequencies by tool.
 +---------------+-----------------------------------------------------------------+
 |    RK3562     | DDR3/LP3: [324MHz - 1056MHz]; LP4/LP4X/DDR4: [324MHz - 1392MHz] |
 +---------------+-----------------------------------------------------------------+
+| RV1106/RV1103 |         DDR2: 528MHz;         DDR3: 324,660,792,924;            |
++---------------+-----------------------------------------------------------------+
 
 * DDR frequencies(add more)
 
@@ -341,6 +345,11 @@ phy_ddr*_odt_pull_up_en: 1: enable PHY pull up odt. 0: disable
 phy_ddr*_odt_pull_dn_en: 1: enable PHY pull down odt. 0: disable
 phy_ddr*_odten_freq_mhz: The PHY odt enable when larger than this frequency. unit: MHz.
 ddr*_odten_freq_mhz: The DRAM odt(DQ/DQS) enable when larger than this frequency. unit: MHz.
+
+Note:
+ddr4_odten_freq_mhz: The DDR4 DRAM ODT is not supported below 625MHz according to JEDEC standard. It means ddr4_odten_freq_mhz should not less than 625.
+lp4_dq_odten_freq_mhz/lp4x_dq_odten_freq_mhz: The lp4/lp4x DRAM DQ ODT is not supported below 800MHz according to JEDEC standard.
+	 It means lp4_dq_odten_freq_mhz/lp4x_dq_odten_freq_mhz should not less than 800.
 
 The phy side ODT support value as follows:
 The ODT "0" means disabled ODT.
