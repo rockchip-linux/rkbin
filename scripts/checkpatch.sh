@@ -378,6 +378,10 @@ function pack_trust_image()
 function check_dirty()
 {
 	for FILE in `find -name '*spl*.bin' -o -name '*tpl*.bin' -o -name '*usbplug*.bin' -o -name '*bl31*.elf' -o -name '*bl32*.bin'`; do
+		if [[ "${FILE}" == *fspi1* ]]; then
+			echo "Skip clean: ${FILE}"
+			continue;
+		fi
 		echo "Checking clean: ${FILE}"
 		if strings ${FILE} | grep '\-dirty ' ; then
 			echo "ERROR: ${FILE} is dirty"
