@@ -1,5 +1,20 @@
 # PX30 Release Note
 
+## px30_bl32_v2.16.bin
+
+| Date       | File                | Build commit | Severity  |
+| ---------- | :------------------ | ------------ | --------- |
+| 2024-04-16 | px30_bl32_v2.16.bin | 185dc3c92    | important |
+
+### New
+
+1. Optimization parameter check to enhance security.
+2. Support printing TEE memory usage information.
+3. Hardware crypto supports addresses exceeding 4G.
+4. Support printing FWVER information.
+
+------
+
 ## px30_ddr_333MHz_v2.09.bin
 
 | Date       | file                      | Build commit | Severity |
