@@ -1,5 +1,20 @@
 # RK3399PRO Release Note
 
+## rk3399pro_bl32_v2.12.bin
+
+| Date       | file                     | Build commit | Severity  |
+| ---------- | ------------------------ | ------------ | --------- |
+| 2024-04-16 | rk3399pro_bl32_v2.12.bin | 369edd59c    | important |
+
+### New
+
+1. Optimization parameter check to enhance security.
+2. Support printing TEE memory usage information.
+3. Support printing FWVER information.
+4. Support pstore for optee log.
+
+------
+
 ## rk3399pro_bl32_v2.11.bin
 
 | Date       | file                     | Build commit | Severity |
