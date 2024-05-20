@@ -64,8 +64,8 @@ if [[ $soc == RK3588 ]]; then
 		exit
 	fi
 
-	if [[ $lanes != 4 && $lanes != 2 ]]; then
-		echo "input param lanes=$lanes invalid, support 4/2"
+	if [[ $lanes != 4 && $lanes != 2 && $lanes != 1 ]]; then
+		echo "input param lanes=$lanes invalid, support 4/2/1"
 		usage
 		exit
 	fi
@@ -105,11 +105,20 @@ else
 fi 
 
 if [[ $lanes == 4 ]]; then
+	code1=43
 	if [[ $soc == RK3588 ]]; then
 		code0=04
 	fi
 elif [[ $lanes == 2 ]]; then
 	code1=23
+	if [[ $soc == RK3588 ]]; then
+		code0=01
+	fi
+elif [[ $lanes == 1 ]]; then
+	code1=13
+	if [[ $soc == RK3588 ]]; then
+		code0=03
+	fi
 fi
 
 if [[ $baundary == 1500000 ]]; then
