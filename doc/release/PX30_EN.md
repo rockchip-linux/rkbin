@@ -1,5 +1,19 @@
 # PX30 Release Note
 
+## px30_bl32_v2.17.bin
+
+| Date       | File                | Build commit | Severity  |
+| ---------- | :------------------ | ------------ | --------- |
+| 2024-07-09 | px30_bl32_v2.17.bin | 7ab599eca    | important |
+
+### New
+
+1.  Other security enhancements.
+2.  RPMB change read data to multiple times.
+3.  Increase MPI_MEMPOOL_SIZE size.
+
+------
+
 ## px30_ddr_333MHz_v2.10.bin
 
 | Date       | file                      | Build commit | Severity  |
