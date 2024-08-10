@@ -1,5 +1,17 @@
 # RV1103B Release Note
 
+## rv1103b_tee_ta_v1.00.bin
+
+| 时间       | 文件                     | 编译 commit | 重要程度 |
+| ---------- | :----------------------- | ----------- | -------- |
+| 2024-08-20 | rv1103b_tee_ta_v1.00.bin | ed4478bc9   | 重要     |
+
+### New
+
+1. 支持OPTEE。
+
+------
+
 ## rv1103b_{ddr,spl,usbplug,hpmcu}_v1.00.bin
 
 | 时间       | 文件                               | 编译 commit                                    | 重要程度 |

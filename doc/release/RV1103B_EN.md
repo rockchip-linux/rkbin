@@ -1,5 +1,17 @@
 # RV1103B Release Note
 
+## rv1103b_tee_ta_v1.00.bin
+
+| Date       | File                     | Build commit | Severity  |
+| ---------- | :----------------------- | ------------ | --------- |
+| 2024-08-20 | rv1103b_tee_ta_v1.00.bin | ed4478bc9    | important |
+
+### New
+
+1. Add OPTEE support.
+
+------
+
 ## rv1103b_{ddr,spl,usbplug,hpmcu}_v1.00.bin
 
 | Date       | File                               | Build commit                                   | Severity |
