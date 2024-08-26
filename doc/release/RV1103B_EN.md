@@ -1,5 +1,21 @@
 # RV1103B Release Note
 
+## rv1103b_ddr_924MHz{_tb}_v1.03.bin
+
+| Date       | File                              | Build commit | Severity  |
+| ---------- | :-------------------------------- | ------------ | --------- |
+| 2024-08-26 | rv1103b_ddr_924MHz{_tb}_v1.03.bin | b991ae72ff   | important |
+
+### Fixed
+
+| Index | Severity  | Update                                   | Issue description | Issue source |
+| ----- | --------- | ---------------------------------------- | ----------------- | ------------ |
+| 1     | important | Fix gate training timeout of DDR2 528MHz | -                 | -            |
+| 2     | important | Fix isp mipi drop when 4M 60fps          | -                 | -            |
+| 3     | important | Fix DDR setting for power-saving         | -                 | -            |
+
+------
+
 ## rv1103b_tee_ta_v1.00.bin
 
 | Date       | File                     | Build commit | Severity  |
