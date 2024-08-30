@@ -1,5 +1,17 @@
 # RV1103B Release Note
 
+## rv1103b_ddr_924MHz{_tb}_v1.04.bin
+
+| Date       | File                              | Build commit | Severity  |
+| ---------- | :-------------------------------- | ------------ | --------- |
+| 2024-08-30 | rv1103b_ddr_924MHz{_tb}_v1.04.bin | ccb664bdcf   | important |
+
+### New
+
+1. Improve DDR stability.
+
+------
+
 ## rv1103b_ddr_924MHz{_tb}_v1.03.bin
 
 | Date       | File                              | Build commit | Severity  |
