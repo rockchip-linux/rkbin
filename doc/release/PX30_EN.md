@@ -1,5 +1,17 @@
 # PX30 Release Note
 
+## px30_bl32_v2.18.bin
+
+| Date       | File                | Build commit | Severity  |
+| ---------- | :------------------ | ------------ | --------- |
+| 2024-09-02 | px30_bl32_v2.18.bin | 6c78a7d8c    | important |
+
+### New
+
+1.  Support software TA encryption key, customers can use TA encryption function without burning the key.
+
+------
+
 ## px30_ddr_333MHz_v2.11.bin
 
 | Date       | file                      | Build commit | Severity  |
