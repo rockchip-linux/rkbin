@@ -1,5 +1,18 @@
 # RV1103B Release Note
 
+
+## rv1103b_flash_acc_w25n01xx_v1.00.bin
+
+| Date       | File                              | Build commit | Severity  |
+| ---------- | :--------------------------------------- | ----------- | -------- |
+| 2024-10-08 | rv1103b_flash_acc_w25n01xx_v1.00.bin        | c2c14bb7e419  | important     |
+
+### New
+
+1. Add w25n01jw rom accelerator.
+
+------
+
 ## rv1103b_usbplug_auto_merge_v1.10.bin
 
 | Date       | File                               | Build commit                                   | Severity |

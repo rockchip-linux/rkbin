@@ -1,5 +1,17 @@
 # RV1103B Release Note
 
+## rv1103b_flash_acc_w25n01xx_v1.00.bin
+
+| 时间       | 文件                                     | 编译 commit | 重要程度 |
+| ---------- | :--------------------------------------- | ----------- | -------- |
+| 2024-10-08 | rv1103b_flash_acc_w25n01xx_v1.00.bin        | c2c14bb7e419  | 重要     |
+
+### New
+
+1. 添加 w25n01jw rom 快启支持。
+
+------
+
 ## rv1103b_usbplug_auto_merge_v1.10.bin
 
 | 时间       | 文件                               | 编译 commit                                    | 重要程度 |
