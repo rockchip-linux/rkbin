@@ -1,5 +1,17 @@
 # RV1103B Release Note
 
+## rv1103b_usbplug_auto_merge_v1.00.bin
+
+| Date       | File                               | Build commit                                   | Severity |
+| ---------- | :--------------------------------- | ---------------------------------------------- | -------- |
+| 2024-09-25 | rv1103b_usbplug_auto_merge_v1.00.bin | a87eca5 | moderate |
+
+### New
+
+1. Initial version.
+
+------
+
 ## rv1103b_ddr_924MHz{_tb}_v1.04.bin
 
 | Date       | File                              | Build commit | Severity  |
