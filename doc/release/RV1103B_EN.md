@@ -1,5 +1,19 @@
 # RV1103B Release Note
 
+## rv1103b_ddr_924MHz{_tb}_v1.05.bin
+
+| Date       | File                              | Build commit | Severity  |
+| ---------- | :-------------------------------- | ------------ | --------- |
+| 2024-10-14 | rv1103b_ddr_924MHz{_tb}_v1.05.bin | a0d2414c29   | important |
+
+### Fixed
+
+| Index | Severity  | Update                                          | Issue description | Issue source |
+| ----- | --------- | ----------------------------------------------- | ----------------- | ------------ |
+| 1     | important | Fix DDR3 924MHz probabilistic resume hang issue | -                 | -            |
+
+------
+
 ## rv1103b_tee_ta_v1.01.bin
 
 | Date       | File                     | Build commit | Severity  |
