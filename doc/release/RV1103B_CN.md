@@ -1,5 +1,17 @@
 # RV1103B Release Note
 
+## rv1103b_usbplug_auto_merge_v1.10.bin
+
+| 时间       | 文件                               | 编译 commit                                    | 重要程度 |
+| ---------- | :--------------------------------- | ---------------------------------------------- | -------- |
+| 2024-09-29 | rv1103b_usbplug_auto_merge_v1.10.bin | f9ecba2b | 普通     |
+
+### New
+
+1. 修改 cs1 为 gpio2a6。
+
+------
+
 ## rv1103b_usbplug_auto_merge_v1.00.bin
 
 | 时间       | 文件                               | 编译 commit                                    | 重要程度 |

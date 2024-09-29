@@ -1,5 +1,17 @@
 # RV1103B Release Note
 
+## rv1103b_usbplug_auto_merge_v1.10.bin
+
+| Date       | File                               | Build commit                                   | Severity |
+| ---------- | :--------------------------------- | ---------------------------------------------- | -------- |
+| 2024-09-29 | rv1103b_usbplug_auto_merge_v1.10.bin | f9ecba2b | moderate |
+
+### New
+
+1. Change cs1 to gpio2a6.
+
+------
+
 ## rv1103b_usbplug_auto_merge_v1.00.bin
 
 | Date       | File                               | Build commit                                   | Severity |
