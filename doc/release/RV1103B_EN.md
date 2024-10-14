@@ -1,5 +1,17 @@
 # RV1103B Release Note
 
+## rv1103b_tee_ta_v1.01.bin
+
+| Date       | File                     | Build commit | Severity  |
+| ---------- | :----------------------- | ------------ | --------- |
+| 2024-10-14 | rv1103b_tee_ta_v1.01.bin | 066b2fbeb    | important |
+
+### New
+
+1. Modify the TEE loading address to 62M.
+
+------
+
 
 ## rv1103b_flash_acc_w25n01xx_v1.00.bin
 
