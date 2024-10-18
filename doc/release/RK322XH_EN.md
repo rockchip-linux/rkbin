@@ -1,5 +1,19 @@
 # RK322XH Release Note
 
+## rk322xh_ddr_{333,400}MHz_v1.20.bin
+
+| Date       | File                               | Build commit | Severity |
+| ---------- | ---------------------------------- | ------------ | -------- |
+| 2024-10-18 | rk322xh_ddr_{333,400}MHz_v1.20.bin | 4d28874      | moderate |
+
+### Fixed
+
+| Index | Severity | Update                                                 | Issue description                                            | Issue source |
+| ----- | -------- | ------------------------------------------------------ | ------------------------------------------------------------ | ------------ |
+| 1     | moderate | Fix low probability DDR4 capacity detection anomalies. | Occasionally, there may be a mismatch in DDR4 capacity by 1/2 or 1/4 when the device is powered on or off. | -            |
+
+------
+
 ## rk322xh_bl32_v2.02.bin
 
 | Date       | File                   | Build commit | Severity |
