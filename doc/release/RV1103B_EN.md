@@ -1,5 +1,17 @@
 # RV1103B Release Note
 
+## rv1103b_hpmcu_wrap_v2.02.bin
+
+| Date       | File                         | Build commit     | Severity  |
+| ---------- | :--------------------------- | ---------------- | --------- |
+| 2024-10-22 | rv1103b_hpmcu_wrap_v2.02.bin | rockit_ko:26f0ca4 | important |
+
+### New
+
+1. Support double channel wrap.
+
+------
+
 ## rv1103b_ddr_924MHz{_tb}_v1.05.bin
 
 | Date       | File                              | Build commit | Severity  |
