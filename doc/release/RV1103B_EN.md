@@ -1,5 +1,20 @@
 # RV1103B Release Note
 
+## rv1103b_tee_ta_v1.02.bin
+
+| Date       | File                     | Build commit | Severity  |
+| ---------- | :----------------------- | ------------ | --------- |
+| 2024-11-01 | rv1103b_tee_ta_v1.02.bin | 9f2aca7d1    | important |
+
+### Fixed
+
+| Index | Severity  | Update                                                       | Issue description                                            | Issue source |
+| ----- | --------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------ |
+| 1     | important | check whether the rpmb key has been burned before changing security level | upgrading from weak security level to strong security level may result in rpmb key verification failure | -            |
+| 2     | important | fixed RSA OAEP MGF1 algorithm                                | TA will report an error when using RSA algorithm OAEP MGF1 padding method | -            |
+
+------
+
 ## rv1103b_hpmcu_wrap_v2.02.bin
 
 | Date       | File                         | Build commit     | Severity  |
