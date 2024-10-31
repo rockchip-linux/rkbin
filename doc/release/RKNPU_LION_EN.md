@@ -1,5 +1,22 @@
 # RKNPU_LION Release Note
 
+## rknpu_lion_bl32_v2.03.bin
+
+| Date       | File                      | Build commit | Severity  |
+| ---------- | :------------------------ | ------------ | --------- |
+| 2024-10-31 | rknpu_lion_bl32_v2.03.bin | 9f2aca7d1    | important |
+
+### New
+
+1. Add support for soft ta encryption key.
+2. RPMB support read data to multiple times.
+3. Optimization parameter check to enhance security.
+4. Support printing TEE memory usage information.
+5. Hardware crypto supports addresses exceeding 4G.
+6. Support printing FWVER information.
+
+------
+
 ## rknpu_lion_bl32_v2.02.bin
 
 | Date       | File                      | Build commit | Severity  |
