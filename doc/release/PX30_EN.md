@@ -1,5 +1,20 @@
 # PX30 Release Note
 
+## px30_bl32_v2.19.bin
+
+| Date       | File                | Build commit | Severity  |
+| ---------- | :------------------ | ------------ | --------- |
+| 2024-10-31 | px30_bl32_v2.19.bin | 9f2aca7d1    | important |
+
+### Fixed
+
+| Index | Severity  | Update                                            | Issue description                                            | Issue source |
+| ----- | --------- | ------------------------------------------------- | ------------------------------------------------------------ | ------------ |
+| 1     | important | fixed RSA OAEP MGF1 algorithm                     | TA will report an error when using RSA algorithm OAEP MGF1 padding method | -            |
+| 2     | important | fixed condition of whether secure boot is enabled | Under unstable hardware conditions, it may be mistakenly believed that secure boot is enabled | -            |
+
+------
+
 ## px30_bl32_v2.18.bin
 
 | Date       | File                | Build commit | Severity  |
