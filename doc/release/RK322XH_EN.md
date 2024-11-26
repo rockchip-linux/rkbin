@@ -1,5 +1,19 @@
 # RK322XH Release Note
 
+## rk322xh_ddr_{333,400}MHz_v1.21.bin
+
+| Date       | File                               | Build commit | Severity |
+| ---------- | ---------------------------------- | ------------ | -------- |
+| 2024-11-26 | rk322xh_ddr_{333,400}MHz_v1.21.bin | 48fb7bc      | moderate |
+
+### Fixed
+
+| Index | Severity | Update                           | Issue description | Issue source |
+| ----- | -------- | -------------------------------- | ----------------- | ------------ |
+| 1     | moderate | Modify the version print format. | -                 | -            |
+
+------
+
 ## rk322xh_ddr_{333,400}MHz_v1.20.bin
 
 | Date       | File                               | Build commit | Severity |
