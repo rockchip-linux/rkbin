@@ -1,5 +1,17 @@
 # RV1103B Release Note
 
+## rv1103b_tee_ta_v1.03.bin
+
+| Date       | File                     | Build commit | Severity  |
+| ---------- | :----------------------- | ------------ | --------- |
+| 2024-12-17 | rv1103b_tee_ta_v1.03.bin | 6b118d039    | important |
+
+### New
+
+1. Supports hardware crypto and true random number generator TRNG.
+
+------
+
 ## rv1103b_tee_ta_v1.02.bin
 
 | Date       | File                     | Build commit | Severity  |
